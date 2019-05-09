@@ -235,10 +235,11 @@ glfw_library = library(
   include_directories: [
     include_directories('../include'),
     include_directories('.')
-  ]
+  ],
+  install : true
 )
 
-glfw_dependency = declare_dependency(
+glfw_dep = declare_dependency(
   link_with: glfw_library,
   include_directories: [
     include_directories('../include'),

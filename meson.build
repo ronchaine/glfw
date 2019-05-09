@@ -8,7 +8,7 @@ project('glfw', 'c',
   ],
 )
 
-add_global_arguments('-DMESON_BUILD -Wall -Werror -Wfatal-errors -g', language: 'c')
+add_project_arguments('-DMESON_BUILD', language: 'c')
 
 compiler  = meson.get_compiler('c')
 os        = host_machine.system()
@@ -100,10 +100,12 @@ endif
 
 subdir('src')
 
-#if not get_option('glfw_build_examples').disabled()
-#  subdir('examples')
-#endif
-#
+install_headers('include/GLFW/glfw3.h', subdir : 'GLFW')
+install_headers('include/GLFW/glfw3native.h', subdir : 'GLFW')
+
+if not get_option('glfw_build_examples').disabled()
+  subdir('examples')
+endif
 
 if not get_option('glfw_build_tests').disabled()
   subdir('tests')

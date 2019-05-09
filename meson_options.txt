@@ -1,0 +1,22 @@
+option('glfw_build_shared',   type : 'boolean', value : 'false', description : 'Build shared libraries')
+option('glfw_build_examples', type : 'feature', value : 'auto', description : 'Build examples')
+option('glfw_build_tests',    type : 'feature', value : 'auto', description : 'Build tests')
+option('glfw_build_docs',     type : 'feature', value : 'auto', description : 'Build the GLFW documentation')
+
+# Unix options
+option('glfw_use_osmesa', type : 'feature', value : 'disabled', description : 'Use OSMesa for offscreen context creation')
+
+# Windows options
+option('glfw_use_hybrid_hpg', type : 'feature', value : 'disabled', description : 'Force use of high-performance GPU on hybrid systems')
+
+# MSVC options
+option('use_msvc_runtime_library_dll', type : 'boolean', value : 'true', description : 'Use MSVC runtime library DLL')
+
+# Backends
+option('glfw_wayland',  type : 'feature', value : 'auto', description : 'Enable Wayland backend')
+option('glfw_osmesa',   type : 'feature', value : 'disabled', description : 'Enable OSMesa backend')
+option('glfw_win32',    type : 'feature', value : 'disabled', description : 'Enable Win32 backend')
+option('glfw_cocoa',    type : 'feature', value : 'disabled', description : 'Enable Cocoa backend')
+option('glfw_gbm',      type : 'feature', value : 'disabled', description : 'Enable GBM/KMS backend')
+option('glfw_x11',      type : 'feature', value : 'disabled', description : 'Enable X11 backend')
+

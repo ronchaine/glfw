@@ -1,6 +1,11 @@
 project('glfw', 'c',
   version: '3.4.0',
   license: 'zlib',
+  default_options : [
+    'buildtype=debugoptimized',
+    'default_library=static',
+    'b_pie=true',
+  ],
 )
 
 add_global_arguments('-DMESON_BUILD', language: 'c')
@@ -15,8 +20,6 @@ math_dep  = compiler.find_library('m', required: false)
 rt_dep    = compiler.find_library('rt', required: false)
 
 pkgconfig = import('pkgconfig')
-
-glfw_library_name = ''
 
 unix = not ['windows', 'darwin', 'android', 'haiku'].contains(os)
 

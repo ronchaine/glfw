@@ -1,4 +1,3 @@
-option('glfw_build_shared',   type : 'boolean', value : 'false', description : 'Build shared libraries')
 option('glfw_build_examples', type : 'feature', value : 'auto', description : 'Build examples')
 option('glfw_build_tests',    type : 'feature', value : 'auto', description : 'Build tests')
 option('glfw_build_docs',     type : 'feature', value : 'auto', description : 'Build the GLFW documentation')

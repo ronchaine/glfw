@@ -25,6 +25,8 @@
 //
 //========================================================================
 
+#pragma once
+
 #if defined(_GLFW_USE_EGLPLATFORM_H)
  #include <EGL/eglplatform.h>
 #elif defined(_GLFW_WIN32)

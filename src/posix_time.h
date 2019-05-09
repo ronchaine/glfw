@@ -25,6 +25,8 @@
 //
 //========================================================================
 
+#pragma once
+
 #define _GLFW_PLATFORM_LIBRARY_TIMER_STATE _GLFWtimerPOSIX posix
 
 #include <stdint.h>

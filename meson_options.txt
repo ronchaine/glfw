@@ -17,5 +17,5 @@ option('glfw_osmesa',   type : 'feature', value : 'disabled', description : 'Ena
 option('glfw_win32',    type : 'feature', value : 'disabled', description : 'Enable Win32 backend')
 option('glfw_cocoa',    type : 'feature', value : 'disabled', description : 'Enable Cocoa backend')
 option('glfw_gbm',      type : 'feature', value : 'disabled', description : 'Enable GBM/KMS backend')
-option('glfw_x11',      type : 'feature', value : 'disabled', description : 'Enable X11 backend')
+option('glfw_x11',      type : 'feature', value : 'auto', description : 'Enable X11 backend')
 

@@ -180,18 +180,42 @@ typedef void (APIENTRY * PFN_vkVoidFunction)(void);
 #endif
 
 #if defined(_GLFW_COCOA)
+ #define API_FOUND
  #include "cocoa_platform.h"
-#elif defined(_GLFW_WIN32)
+#endif
+#if defined(_GLFW_WIN32)
+ #define API_FOUND
  #include "win32_platform.h"
-#elif defined(_GLFW_X11)
+#endif
+#if defined(_GLFW_X11)
+ #define API_FOUND
  #include "x11_platform.h"
-#elif defined(_GLFW_WAYLAND)
+#endif
+#if defined(_GLFW_WAYLAND)
+ #define API_FOUND
  #include "wl_platform.h"
-#elif defined(_GLFW_OSMESA)
+#endif
+#if defined(_GLFW_OSMESA)
+ #define API_FOUND
  #include "null_platform.h"
-#else
+#endif
+#if defined(_GLFW_GBM)
+ #define API_FOUND
+ #include "null_platform.h"
+#endif
+#ifndef API_FOUND
  #error "No supported window creation API selected"
 #endif
+
+typedef enum _GLFWplatformnames
+{
+  GLFW_PLATFORM_COCOA,
+  GLFW_PLATFORM_WIN32,
+  GLFW_PLATFORM_X11,
+  GLFW_PLATFORM_WAYLAND,
+  GLFW_PLATFORM_OSMESA,
+  GLFW_PLATFORM_GBM
+} _GLFWplatformnames;
 
 // Constructs a version number string from the public header macros
 #define _GLFW_CONCAT_VERSION(m, n, r) #m "." #n "." #r

@@ -25,6 +25,8 @@
 //
 //========================================================================
 
+#pragma once
+
 #define OSMESA_RGBA 0x1908
 #define OSMESA_FORMAT 0x22
 #define OSMESA_DEPTH_BITS 0x30

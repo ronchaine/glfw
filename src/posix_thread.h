@@ -25,6 +25,8 @@
 //
 //========================================================================
 
+#pragma once
+
 #include <pthread.h>
 
 #define _GLFW_PLATFORM_TLS_STATE    _GLFWtlsPOSIX   posix

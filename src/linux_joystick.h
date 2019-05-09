@@ -24,6 +24,8 @@
 //
 //========================================================================
 
+#pragma once
+
 #include <linux/input.h>
 #include <linux/limits.h>
 #include <regex.h>

@@ -11,7 +11,7 @@ config_data.set('_GLFW_COCOA',          cocoa_backend_enabled)
 config_data.set('_GLFW_GBM',            gbm_backend_enabled)
 config_data.set('_GLFW_X11',            x11_backend_enabled)
 
-config_data.set('_GLFW_BUILD_DLL',      get_option('glfw_build_shared'))
+config_data.set('_GLFW_BUILD_DLL',      not (get_option('default_library') == 'static'))
 config_data.set('_GLFW_USE_HYBRID_HPG', get_option('glfw_use_hybrid_hpg').enabled())
 
 config_file = configure_file(configuration: config_data, output: 'glfw_config.h')
@@ -227,10 +227,9 @@ endif
 # Library targets
 #--------------------------------------------------------------------
 
-glfw_library = static_library(
-  'glfw',
+glfw_library = library(
+  glfw_library_name,
   sources + headers,
-  version: meson.project_version(),
   c_args: ['-D_GLFW_USE_CONFIG_H'],
   dependencies: dependencies,
   include_directories: [
@@ -245,4 +244,16 @@ glfw_dependency = declare_dependency(
     include_directories('../include'),
     include_directories('.')
   ]
+)
+
+#--------------------------------------------------------------------
+# Generate pkg-config file
+#--------------------------------------------------------------------
+
+pkgconfig.generate(
+  glfw_library,
+  name: 'GLFW',
+  filebase: glfw_library_name,
+  description: 'A multi-platform library for OpenGL, Vulkan, window and input',
+  url: 'https://www.glfw.org',
 )

@@ -1,21 +1,21 @@
 examples_linker_args = []
-examples_dependencies = [glfw_dependency, math_dep]
+examples_dependencies = [glfw_dep, math_dep]
 
 if compiler.get_id() == 'msvc'
   tests_linker_args += '/ENTRY:mainCRTStartup'
 endif
 
-glad_gl = [meson.source_root() + '/deps/glad/gl.h',
-           meson.source_root() + '/deps/glad_gl.c']
+glad_gl = ['../deps/glad/gl.h',
+           '../deps/glad_gl.c']
 
-glad_vulkan = [meson.source_root() + '/deps/glad/vulkan.h',
-               meson.source_root() + '/deps/glad_vulkan.c']
+glad_vulkan = ['../deps/glad/vulkan.h',
+               '../deps/glad_vulkan.c']
 
-getopt = [meson.source_root() + '/deps/getopt.h',
-          meson.source_root() + '/deps/getopt.c']
+getopt = ['../deps/getopt.h',
+          '../deps/getopt.c']
 
-tinycthread = [meson.source_root() + '/deps/tinycthread.h',
-               meson.source_root() + '/deps/tinycthread.c']
+tinycthread = ['../deps/tinycthread.h',
+               '../deps/tinycthread.c']
 
 os_extra_files = []
 

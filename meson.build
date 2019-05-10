@@ -100,10 +100,9 @@ endif
 
 subdir('src')
 
-#if not get_option('glfw_build_examples').disabled()
-#  subdir('examples')
-#endif
-#
+if not get_option('glfw_build_examples').disabled()
+  subdir('examples')
+endif
 
 if not get_option('glfw_build_tests').disabled()
   subdir('tests')

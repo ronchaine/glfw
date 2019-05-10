@@ -179,6 +179,16 @@ typedef void (APIENTRY * PFN_vkVoidFunction)(void);
   #define vkGetInstanceProcAddr _glfw.vk.GetInstanceProcAddr
 #endif
 
+typedef enum _GLFWplatformnames
+{
+  GLFW_PLATFORM_COCOA,
+  GLFW_PLATFORM_WIN32,
+  GLFW_PLATFORM_X11,
+  GLFW_PLATFORM_WAYLAND,
+  GLFW_PLATFORM_OSMESA,
+  GLFW_PLATFORM_GBM
+} _GLFWplatformnames;
+
 #if defined(_GLFW_COCOA)
  #define API_FOUND
  #include "cocoa_platform.h"
@@ -206,16 +216,6 @@ typedef void (APIENTRY * PFN_vkVoidFunction)(void);
 #ifndef API_FOUND
  #error "No supported window creation API selected"
 #endif
-
-typedef enum _GLFWplatformnames
-{
-  GLFW_PLATFORM_COCOA,
-  GLFW_PLATFORM_WIN32,
-  GLFW_PLATFORM_X11,
-  GLFW_PLATFORM_WAYLAND,
-  GLFW_PLATFORM_OSMESA,
-  GLFW_PLATFORM_GBM
-} _GLFWplatformnames;
 
 // Constructs a version number string from the public header macros
 #define _GLFW_CONCAT_VERSION(m, n, r) #m "." #n "." #r

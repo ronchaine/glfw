@@ -583,12 +583,15 @@ struct _GLFWlibrary
         GLFWbool        KHR_surface;
 #if defined(_GLFW_WIN32)
         GLFWbool        KHR_win32_surface;
-#elif defined(_GLFW_COCOA)
+#endif
+#if defined(_GLFW_COCOA)
         GLFWbool        MVK_macos_surface;
-#elif defined(_GLFW_X11)
+#endif
+#if defined(_GLFW_X11)
         GLFWbool        KHR_xlib_surface;
         GLFWbool        KHR_xcb_surface;
-#elif defined(_GLFW_WAYLAND)
+#endif
+#if defined(_GLFW_WAYLAND)
         GLFWbool        KHR_wayland_surface;
 #endif
     } vk;

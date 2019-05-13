@@ -81,14 +81,14 @@ typedef VkResult (APIENTRY *PFN_vkCreateMacOSSurfaceMVK)(VkInstance,const VkMacO
 #define _glfw_dlclose(handle) dlclose(handle)
 #define _glfw_dlsym(handle, name) dlsym(handle, name)
 
-#define _GLFW_EGL_NATIVE_WINDOW  ((EGLNativeWindowType) window->ns.view)
-#define _GLFW_EGL_NATIVE_DISPLAY EGL_DEFAULT_DISPLAY
+#define _GLFW_COCOA_EGL_NATIVE_WINDOW  ((EGLNativeWindowType) window->ns.view)
+#define _GLFW_COCOA_EGL_NATIVE_DISPLAY EGL_DEFAULT_DISPLAY
 
-#define _GLFW_PLATFORM_WINDOW_STATE         _GLFWwindowNS  ns
-#define _GLFW_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryNS ns
-#define _GLFW_PLATFORM_LIBRARY_TIMER_STATE  _GLFWtimerNS   ns
-#define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorNS ns
-#define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorNS  ns
+#define _GLFW_COCOA_PLATFORM_WINDOW_STATE         _GLFWwindowNS  ns
+#define _GLFW_COCOA_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryNS ns
+#define _GLFW_COCOA_PLATFORM_LIBRARY_TIMER_STATE  _GLFWtimerNS   ns
+#define _GLFW_COCOA_PLATFORM_MONITOR_STATE        _GLFWmonitorNS ns
+#define _GLFW_COCOA_PLATFORM_CURSOR_STATE         _GLFWcursorNS  ns
 
 // HIToolbox.framework pointer typedefs
 #define kTISPropertyUnicodeKeyLayoutData _glfw.ns.tis.kPropertyUnicodeKeyLayoutData

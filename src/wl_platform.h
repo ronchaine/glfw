@@ -76,16 +76,16 @@ typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR
 #define _glfw_dlclose(handle) dlclose(handle)
 #define _glfw_dlsym(handle, name) dlsym(handle, name)
 
-#define _GLFW_EGL_NATIVE_WINDOW         ((EGLNativeWindowType) window->wl.native)
-#define _GLFW_EGL_NATIVE_DISPLAY        ((EGLNativeDisplayType) _glfw.wl.display)
+#define _GLFW_WL_EGL_NATIVE_WINDOW         ((EGLNativeWindowType) window->wl.native)
+#define _GLFW_WL_EGL_NATIVE_DISPLAY        ((EGLNativeDisplayType) _glfw.wl.display)
 
-#define _GLFW_PLATFORM_WINDOW_STATE         _GLFWwindowWayland  wl
-#define _GLFW_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryWayland wl
-#define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorWayland wl
-#define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorWayland  wl
+#define _GLFW_WL_PLATFORM_WINDOW_STATE         _GLFWwindowWayland  wl
+#define _GLFW_WL_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryWayland wl
+#define _GLFW_WL_PLATFORM_MONITOR_STATE        _GLFWmonitorWayland wl
+#define _GLFW_WL_PLATFORM_CURSOR_STATE         _GLFWcursorWayland  wl
 
-#define _GLFW_PLATFORM_CONTEXT_STATE
-#define _GLFW_PLATFORM_LIBRARY_CONTEXT_STATE
+#define _GLFW_WL_PLATFORM_CONTEXT_STATE
+#define _GLFW_WL_PLATFORM_LIBRARY_CONTEXT_STATE
 
 struct wl_cursor_image {
     uint32_t width;

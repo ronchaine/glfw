@@ -291,13 +291,13 @@ typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR)(
 #define _GLFW_EGL_NATIVE_WINDOW  ((EGLNativeWindowType) window->win32.handle)
 #define _GLFW_EGL_NATIVE_DISPLAY EGL_DEFAULT_DISPLAY
 
-#define _GLFW_PLATFORM_WINDOW_STATE         _GLFWwindowWin32  win32
-#define _GLFW_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryWin32 win32
-#define _GLFW_PLATFORM_LIBRARY_TIMER_STATE  _GLFWtimerWin32   win32
-#define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorWin32 win32
-#define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorWin32  win32
-#define _GLFW_PLATFORM_TLS_STATE            _GLFWtlsWin32     win32
-#define _GLFW_PLATFORM_MUTEX_STATE          _GLFWmutexWin32   win32
+#define _GLFW_WIN32_PLATFORM_WINDOW_STATE         _GLFWwindowWin32  win32
+#define _GLFW_WIN32_PLATFORM_LIBRARY_WINDOW_STATE _GLFWlibraryWin32 win32
+#define _GLFW_WIN32_PLATFORM_LIBRARY_TIMER_STATE  _GLFWtimerWin32   win32
+#define _GLFW_WIN32_PLATFORM_MONITOR_STATE        _GLFWmonitorWin32 win32
+#define _GLFW_WIN32_PLATFORM_CURSOR_STATE         _GLFWcursorWin32  win32
+#define _GLFW_WIN32_PLATFORM_TLS_STATE            _GLFWtlsWin32     win32
+#define _GLFW_WIN32_PLATFORM_MUTEX_STATE          _GLFWmutexWin32   win32
 
 
 // Win32-specific per-window data

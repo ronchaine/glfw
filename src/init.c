@@ -224,6 +224,8 @@ GLFWAPI int glfwInit(void)
     if (_glfw.initialized)
         return GLFW_TRUE;
 
+    _glfwPlatformLoadFunctions(GLFW_PLATFORM_WAYLAND);
+
     memset(&_glfw, 0, sizeof(_glfw));
     _glfw.hints.init = _glfwInitHints;
 

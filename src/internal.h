@@ -179,7 +179,7 @@ typedef void (APIENTRY * PFN_vkVoidFunction)(void);
   #define vkGetInstanceProcAddr _glfw.vk.GetInstanceProcAddr
 #endif
 
-typedef enum _GLFWplatformnames
+typedef enum _GLFWbackendname
 {
   GLFW_PLATFORM_COCOA,
   GLFW_PLATFORM_WIN32,
@@ -187,34 +187,34 @@ typedef enum _GLFWplatformnames
   GLFW_PLATFORM_WAYLAND,
   GLFW_PLATFORM_OSMESA,
   GLFW_PLATFORM_GBM
-} _GLFWplatformnames;
+} _GLFWbackendname;
 
 #if defined(_GLFW_COCOA)
- #define API_FOUND
- #include "cocoa_platform.h"
+  #define API_FOUND
+  #include "cocoa_platform.h"
 #endif
 #if defined(_GLFW_WIN32)
- #define API_FOUND
- #include "win32_platform.h"
+  #define API_FOUND
+  #include "win32_platform.h"
 #endif
 #if defined(_GLFW_X11)
- #define API_FOUND
- #include "x11_platform.h"
+  #define API_FOUND
+  #include "x11_platform.h"
 #endif
 #if defined(_GLFW_WAYLAND)
- #define API_FOUND
- #include "wl_platform.h"
+  #define API_FOUND
+  #include "wl_platform.h"
 #endif
 #if defined(_GLFW_OSMESA)
- #define API_FOUND
- #include "null_platform.h"
+  #define API_FOUND
+  #include "null_platform.h"
 #endif
 #if defined(_GLFW_GBM)
- #define API_FOUND
- #include "null_platform.h"
+  #define API_FOUND
+  #include "null_platform.h"
 #endif
 #ifndef API_FOUND
- #error "No supported window creation API selected"
+  #error "No supported window creation API selected"
 #endif
 
 #include "platform_internal.h"
@@ -539,6 +539,7 @@ struct _GLFWmutex
 struct _GLFWlibrary
 {
     GLFWbool            initialized;
+    _GLFWbackendname    backend;
 
     struct {
         _GLFWinitconfig init;

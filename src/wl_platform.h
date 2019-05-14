@@ -369,3 +369,9 @@ void _glfwAddOutputWayland(uint32_t name, uint32_t version);
 
 int  _glfwPlatformInitWayland(void);
 void _glfwPlatformTerminateWayland(void);
+
+static const struct _GLFWplatformfunctions _glfwFunctionsWayland = {
+    ._glfwPlatformInitFunc = _glfwPlatformInitWayland,
+    ._glfwPlatformTerminateFunc = _glfwPlatformTerminateWayland
+};
+

@@ -25,6 +25,8 @@
 //
 //========================================================================
 
+#pragma once
+
 #include <unistd.h>
 #include <signal.h>
 #include <stdint.h>
@@ -46,6 +48,8 @@
 
 // The XInput extension provides raw mouse motion input
 #include <X11/extensions/XInput2.h>
+
+#include "platform_common.h"
 
 typedef XRRCrtcGamma* (* PFN_XRRAllocGamma)(int);
 typedef void (* PFN_XRRFreeCrtcInfo)(XRRCrtcInfo*);
@@ -454,4 +458,13 @@ void _glfwReleaseErrorHandlerX11(void);
 void _glfwInputErrorX11(int error, const char* message);
 
 void _glfwPushSelectionToManagerX11(void);
+
+
+int  _glfwPlatformInitX11(void);
+void _glfwPlatformTerminateX11(void);
+
+static const struct _GLFWplatformfunctions _glfwFunctionsX11 = {
+    ._glfwPlatformInitFunc = _glfwPlatformInitX11,
+    ._glfwPlatformTerminateFunc = _glfwPlatformTerminateX11
+};
 

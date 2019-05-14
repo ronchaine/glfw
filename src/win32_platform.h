@@ -25,6 +25,8 @@
 //
 //========================================================================
 
+#include "platform_common.h"
+
 // We don't need all the fancy stuff
 #ifndef NOMINMAX
  #define NOMINMAX

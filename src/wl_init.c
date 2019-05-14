@@ -1028,7 +1028,7 @@ static void createKeyTables(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+int _glfwPlatformInitWayland(void)
 {
     const char *cursorTheme;
     const char *cursorSizeStr;
@@ -1208,7 +1208,7 @@ int _glfwPlatformInit(void)
     return GLFW_TRUE;
 }
 
-void _glfwPlatformTerminate(void)
+void _glfwPlatformTerminateWayland(void)
 {
 #ifdef __linux__
     _glfwTerminateJoysticksLinux();
@@ -1299,7 +1299,7 @@ void _glfwPlatformTerminate(void)
         free(_glfw.wl.clipboardSendString);
 }
 
-const char* _glfwPlatformGetVersionString(void)
+const char* _glfwPlatformGetVersionStringWayland(void)
 {
     return _GLFW_VERSION_NUMBER " Wayland EGL OSMesa"
 #if defined(_POSIX_TIMERS) && defined(_POSIX_MONOTONIC_CLOCK)

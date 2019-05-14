@@ -72,6 +72,8 @@ typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR
 #include "wayland-idle-inhibit-unstable-v1-client-protocol.h"
 #endif
 
+#include "platform_common.h"
+
 #define _glfw_dlopen(name) dlopen(name, RTLD_LAZY | RTLD_LOCAL)
 #define _glfw_dlclose(handle) dlclose(handle)
 #define _glfw_dlsym(handle, name) dlsym(handle, name)
@@ -364,3 +366,6 @@ typedef struct _GLFWcursorWayland
 
 void _glfwAddOutputWayland(uint32_t name, uint32_t version);
 
+
+int  _glfwPlatformInitWayland(void);
+void _glfwPlatformTerminateWayland(void);

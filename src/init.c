@@ -108,6 +108,12 @@ static void terminate(void)
     memset(&_glfw, 0, sizeof(_glfw));
 }
 
+void _glfwPlatformLoadFunctions(_GLFWplatformfunctions funcs)
+{
+    _glfwPlatformInit = funcs._glfwPlatformInitFunc;
+    _glfwPlatformTerminate = funcs._glfwPlatformTerminateFunc;
+    _glfwPlatformGetVersionString = funcs._glfwPlatformGetVersionStringFunc;
+}
 
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW internal API                      //////

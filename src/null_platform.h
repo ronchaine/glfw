@@ -40,6 +40,8 @@
 #define _GLFW_NULL_EGL_CONTEXT_STATE              struct { int dummyEGLContext; }
 #define _GLFW_NULL_EGL_LIBRARY_CONTEXT_STATE      struct { int dummyEGLLibraryContext; }
 
+#include "platform_common.h"
+
 #include "osmesa_context.h"
 #include "posix_time.h"
 #include "posix_thread.h"

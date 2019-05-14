@@ -39,6 +39,8 @@
 #define _GLFW_NULL_EGL_CONTEXT_STATE
 #define _GLFW_NULL_EGL_LIBRARY_CONTEXT_STATE
 
+#include "platform_common.h"
+
 #include "osmesa_context.h"
 #include "posix_time.h"
 #include "posix_thread.h"

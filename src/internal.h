@@ -620,9 +620,9 @@ extern _GLFWlibrary _glfw;
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void);
-void _glfwPlatformTerminate(void);
-const char* _glfwPlatformGetVersionString(void);
+extern int  (*_glfwPlatformInit)(void);
+extern void (*_glfwPlatformTerminate)(void);
+extern const char* (*_glfwPlatformGetVersionString)(void);
 
 void _glfwPlatformGetCursorPos(_GLFWwindow* window, double* xpos, double* ypos);
 void _glfwPlatformSetCursorPos(_GLFWwindow* window, double xpos, double ypos);

@@ -923,7 +923,7 @@ Cursor _glfwCreateCursorX11(const GLFWimage* image, int xhot, int yhot)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+int _glfwPlatformInitX11(void)
 {
 #if !defined(X_HAVE_UTF8_STRING)
     // HACK: If the current locale is "C" and the Xlib UTF-8 functions are
@@ -994,7 +994,7 @@ int _glfwPlatformInit(void)
     return GLFW_TRUE;
 }
 
-void _glfwPlatformTerminate(void)
+void _glfwPlatformTerminateX11(void)
 {
     if (_glfw.x11.helperWindowHandle)
     {
@@ -1081,7 +1081,7 @@ void _glfwPlatformTerminate(void)
 #endif
 }
 
-const char* _glfwPlatformGetVersionString(void)
+const char* _glfwPlatformGetVersionStringX11(void)
 {
     return _GLFW_VERSION_NUMBER " X11 GLX EGL OSMesa"
 #if defined(_POSIX_TIMERS) && defined(_POSIX_MONOTONIC_CLOCK)

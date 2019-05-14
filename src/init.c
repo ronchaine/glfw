@@ -230,7 +230,37 @@ GLFWAPI int glfwInit(void)
     if (_glfw.initialized)
         return GLFW_TRUE;
 
-    _glfwPlatformLoadFunctions(GLFW_PLATFORM_WAYLAND);
+    switch(_glfw.backend)
+    {
+        #if defined(_GLFW_COCOA)
+        case GLFW_PLATFORM_COCOA:
+            _glfwPlatformLoadFunctions(_glfwFunctionsCocoa);
+            break;
+        #endif
+        #if defined(_GLFW_WIN32)
+        case GLFW_PLATFORM_WIN32:
+            _glfwPlatformLoadFunctions(_glfwFunctionsWin32);
+            break;
+        #endif
+        #if defined(_GLFW_X11)
+        case GLFW_PLATFORM_X11:
+            _glfwPlatformLoadFunctions(_glfwFunctionsX11);
+            break;
+        #endif
+        #if defined(_GLFW_WAYLAND)
+        case GLFW_PLATFORM_WAYLAND:
+            _glfwPlatformLoadFunctions(_glfwFunctionsWayland);
+            break;
+        #endif
+        #if defined(_GLFW_GBM)
+        case GLFW_PLATFORM_GBM:
+            _glfwPlatformLoadFunctions(_glfwFunctionsGBM);
+            break;
+        #endif
+        default:
+            terminate();
+            return GLFW_FALSE;
+    }
 
     memset(&_glfw, 0, sizeof(_glfw));
     _glfw.hints.init = _glfwInitHints;

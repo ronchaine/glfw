@@ -395,7 +395,40 @@ GLFWbool _glfwInitEGL(void)
         return GLFW_FALSE;
     }
 
-    _glfw.egl.display = eglGetDisplay(_GLFW_EGL_NATIVE_DISPLAY);
+    switch(_glfw.backend)
+    {
+        #if defined(_GLFW_COCOA)
+        case GLFW_PLATFORM_COCOA:
+            _glfw.egl.display = eglGetDisplay(_GLFW_COCOA_EGL_NATIVE_DISPLAY);
+            break;
+        #endif
+        #if defined(_GLFW_WIN32)
+        case GLFW_PLATFORM_WIN32:
+            _glfw.egl.display = eglGetDisplay(_GLFW_WIN32_EGL_NATIVE_DISPLAY);
+            break;
+        #endif
+        #if defined(_GLFW_X11)
+        case GLFW_PLATFORM_X11:
+            _glfw.egl.display = eglGetDisplay(_GLFW_X11_EGL_NATIVE_DISPLAY);
+            break;
+        #endif
+        #if defined(_GLFW_WAYLAND)
+        case GLFW_PLATFORM_WAYLAND:
+            _glfw.egl.display = eglGetDisplay(_GLFW_WL_EGL_NATIVE_DISPLAY);
+            break;
+        #endif
+        #if defined(_GLFW_GBM)
+        case GLFW_PLATFORM_GBM:
+            _glfw.egl.display = eglGetDisplay(_GLFW_GBM_EGL_NATIVE_DISPLAY);
+            break;
+        #endif
+        default:
+            _glfwInputError(GLFW_PLATFORM_ERROR,
+                            "EGL: Failed to");
+            _glfwTerminateEGL();
+            return GLFW_FALSE;
+    }
+
     if (_glfw.egl.display == EGL_NO_DISPLAY)
     {
         _glfwInputError(GLFW_API_UNAVAILABLE,
@@ -600,11 +633,57 @@ GLFWbool _glfwCreateContextEGL(_GLFWwindow* window,
         setAttrib(EGL_NONE, EGL_NONE);
     }
 
-    window->context.egl.surface =
-        eglCreateWindowSurface(_glfw.egl.display,
-                               config,
-                               _GLFW_EGL_NATIVE_WINDOW,
-                               attribs);
+    switch(_glfw.backend)
+    {
+        #if defined(_GLFW_COCOA)
+        case GLFW_PLATFORM_COCOA:
+            window->context.egl.surface =
+                eglCreateWindowSurface(_glfw.egl.display,
+                                       config,
+                                       _GLFW_COCOA_EGL_NATIVE_WINDOW,
+                                       attribs);
+            break;
+        #endif
+        #if defined(_GLFW_WIN32)
+        case GLFW_PLATFORM_WIN32:
+            window->context.egl.surface =
+                eglCreateWindowSurface(_glfw.egl.display,
+                                       config,
+                                       _GLFW_WIN32_EGL_NATIVE_WINDOW,
+                                       attribs);
+            break;
+        #endif
+        #if defined(_GLFW_X11)
+        case GLFW_PLATFORM_X11:
+            window->context.egl.surface =
+                eglCreateWindowSurface(_glfw.egl.display,
+                                       config,
+                                       _GLFW_X11_EGL_NATIVE_WINDOW,
+                                       attribs);
+            break;
+        #endif
+        #if defined(_GLFW_WAYLAND)
+        case GLFW_PLATFORM_WAYLAND:
+            window->context.egl.surface =
+                eglCreateWindowSurface(_glfw.egl.display,
+                                       config,
+                                       _GLFW_WL_EGL_NATIVE_WINDOW,
+                                       attribs);
+            break;
+        #endif
+        #if defined(_GLFW_GBM)
+        case GLFW_PLATFORM_GBM:
+            window->context.egl.surface =
+                eglCreateWindowSurface(_glfw.egl.display,
+                                       config,
+                                       _GLFW_GBM_EGL_NATIVE_WINDOW,
+                                       attribs);
+            break;
+        #endif
+        default:
+            break;
+    }
+
     if (window->context.egl.surface == EGL_NO_SURFACE)
     {
         _glfwInputError(GLFW_PLATFORM_ERROR,

@@ -448,11 +448,16 @@ void _glfwInputErrorX11(int error, const char* message);
 void _glfwPushSelectionToManagerX11(void);
 
 
+//////////////////////////////////////////////////////////////////////////
+//////                       GLFW platform API                      //////
+//////////////////////////////////////////////////////////////////////////
 int  _glfwPlatformInitX11(void);
 void _glfwPlatformTerminateX11(void);
+const char* _glfwPlatformGetVersionStringX11(void);
 
 static const struct _GLFWplatformfunctions _glfwFunctionsX11 = {
     ._glfwPlatformInitFunc = _glfwPlatformInitX11,
-    ._glfwPlatformTerminateFunc = _glfwPlatformTerminateX11
+    ._glfwPlatformTerminateFunc = _glfwPlatformTerminateX11,
+    ._glfwPlatformGetVersionStringFunc = _glfwPlatformGetVersionStringX11
 };
 

@@ -59,6 +59,11 @@ static _GLFWinitconfig _glfwInitHints =
     }
 };
 
+// GLFW functions platform functions defined in this file
+int  (*_glfwPlatformInit)(void);
+void (*_glfwPlatformTerminate)(void);
+const char* (*_glfwPlatformGetVersionString)(void);
+
 // Terminate the library
 //
 static void terminate(void)

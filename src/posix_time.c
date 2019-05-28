@@ -62,7 +62,7 @@ void _glfwInitTimerPOSIX(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-uint64_t _glfwPlatformGetTimerValue(void)
+uint64_t _glfwPlatformGetTimerValuePosix(void)
 {
 #if defined(CLOCK_MONOTONIC)
     if (_glfw.timer.posix.monotonic)
@@ -80,7 +80,7 @@ uint64_t _glfwPlatformGetTimerValue(void)
     }
 }
 
-uint64_t _glfwPlatformGetTimerFrequency(void)
+uint64_t _glfwPlatformGetTimerFrequencyPosix(void)
 {
     return _glfw.timer.posix.frequency;
 }

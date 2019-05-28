@@ -35,7 +35,7 @@
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-GLFWbool _glfwPlatformCreateTls(_GLFWtls* tls)
+GLFWbool _glfwPlatformCreateTlsPosix(_GLFWtls* tls)
 {
     assert(tls->posix.allocated == GLFW_FALSE);
 
@@ -50,26 +50,26 @@ GLFWbool _glfwPlatformCreateTls(_GLFWtls* tls)
     return GLFW_TRUE;
 }
 
-void _glfwPlatformDestroyTls(_GLFWtls* tls)
+void _glfwPlatformDestroyTlsPosix(_GLFWtls* tls)
 {
     if (tls->posix.allocated)
         pthread_key_delete(tls->posix.key);
     memset(tls, 0, sizeof(_GLFWtls));
 }
 
-void* _glfwPlatformGetTls(_GLFWtls* tls)
+void* _glfwPlatformGetTlsPosix(_GLFWtls* tls)
 {
     assert(tls->posix.allocated == GLFW_TRUE);
     return pthread_getspecific(tls->posix.key);
 }
 
-void _glfwPlatformSetTls(_GLFWtls* tls, void* value)
+void _glfwPlatformSetTlsPosix(_GLFWtls* tls, void* value)
 {
     assert(tls->posix.allocated == GLFW_TRUE);
     pthread_setspecific(tls->posix.key, value);
 }
 
-GLFWbool _glfwPlatformCreateMutex(_GLFWmutex* mutex)
+GLFWbool _glfwPlatformCreateMutexPosix(_GLFWmutex* mutex)
 {
     assert(mutex->posix.allocated == GLFW_FALSE);
 
@@ -82,20 +82,20 @@ GLFWbool _glfwPlatformCreateMutex(_GLFWmutex* mutex)
     return mutex->posix.allocated = GLFW_TRUE;
 }
 
-void _glfwPlatformDestroyMutex(_GLFWmutex* mutex)
+void _glfwPlatformDestroyMutexPosix(_GLFWmutex* mutex)
 {
     if (mutex->posix.allocated)
         pthread_mutex_destroy(&mutex->posix.handle);
     memset(mutex, 0, sizeof(_GLFWmutex));
 }
 
-void _glfwPlatformLockMutex(_GLFWmutex* mutex)
+void _glfwPlatformLockMutexPosix(_GLFWmutex* mutex)
 {
     assert(mutex->posix.allocated == GLFW_TRUE);
     pthread_mutex_lock(&mutex->posix.handle);
 }
 
-void _glfwPlatformUnlockMutex(_GLFWmutex* mutex)
+void _glfwPlatformUnlockMutexPosix(_GLFWmutex* mutex)
 {
     assert(mutex->posix.allocated == GLFW_TRUE);
     pthread_mutex_unlock(&mutex->posix.handle);

@@ -369,13 +369,25 @@ void _glfwAddOutputWayland(uint32_t name, uint32_t version);
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
+
+// init
 int  _glfwPlatformInitWayland(void);
 void _glfwPlatformTerminateWayland(void);
 const char* _glfwPlatformGetVersionStringWayland(void);
 
+// window
+int _glfwPlatformCreateWindowWayland(_GLFWwindow* window,
+                                     const _GLFWwndconfig* wndconfig,
+                                     const _GLFWctxconfig* ctxconfig,
+                                     const _GLFWfbconfig* fbconfig);
+void _glfwPlatformSetCursorWayland(_GLFWwindow* window, _GLFWcursor* cursor);
+
 static const struct _GLFWplatformfunctions _glfwFunctionsWayland = {
     ._glfwPlatformInitFunc = _glfwPlatformInitWayland,
     ._glfwPlatformTerminateFunc = _glfwPlatformTerminateWayland,
-    ._glfwPlatformGetVersionStringFunc = _glfwPlatformGetVersionStringWayland
+    ._glfwPlatformGetVersionStringFunc = _glfwPlatformGetVersionStringWayland,
+
+    ._glfwPlatformCreateWindowFunc = _glfwPlatformCreateWindowWayland,
+    ._glfwPlatformSetCursorFunc = _glfwPlatformSetCursorWayland,
 };
 

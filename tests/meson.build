@@ -37,7 +37,7 @@ programs = [
   ['threads',         [['threads.c']          + glad_gl + tinycthread]],
   ['timeout',         [['timeout.c']          + glad_gl]],
   ['title',           [['title.c']            + glad_gl]],
-  ['trinalge-vulkan', [['triangle-vulkan.c']  + glad_vulkan]],
+  ['triangle-vulkan', [['triangle-vulkan.c']  + glad_vulkan]],
   ['windows',         [['windows.c']          + glad_gl + getopt]]
 ]
 

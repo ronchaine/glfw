@@ -30,15 +30,15 @@ if os == 'windows'
 endif
 
 programs = [
-  ['boing',       [['boing.c']        + glad_gl]],
-  ['gears',       [['gears.c']        + glad_gl]],
-  ['heightmap',   [['heightmap.c']    + glad_gl]],
-  ['offscreen',   [['offscreen.c']    + glad_gl]],
-  ['particles',   [['particles.c']    + glad_gl + getopt + tinycthread]],
-  ['sharing',     [['sharing.c']      + glad_gl]],
-  ['simple',      [['simple.c']       + glad_gl]],
-  ['splitview',   [['splitview.c']    + glad_gl]],
-  ['wave',        [['wave.c']         + glad_gl]],
+  ['boing',           [['boing.c']            + glad_gl]],
+  ['gears',           [['gears.c']            + glad_gl]],
+  ['heightmap',       [['heightmap.c']        + glad_gl]],
+  ['offscreen',       [['offscreen.c']        + glad_gl]],
+  ['particles',       [['particles.c']        + glad_gl + getopt + tinycthread]],
+  ['sharing',         [['sharing.c']          + glad_gl]],
+  ['splitview',       [['splitview.c']        + glad_gl]],
+  ['triangle-opengl', [['triangle-opengl.c']  + glad_gl]],
+  ['wave',            [['wave.c']             + glad_gl]],
 ]
 
 foreach example_program : programs

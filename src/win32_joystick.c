@@ -603,7 +603,7 @@ void _glfwDetectJoystickDisconnectionWin32(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformPollJoystick(_GLFWjoystick* js, int mode)
+int _glfwPlatformPollJoystickWin32(_GLFWjoystick* js, int mode)
 {
     if (js->win32.device)
     {
@@ -742,7 +742,7 @@ int _glfwPlatformPollJoystick(_GLFWjoystick* js, int mode)
     return GLFW_TRUE;
 }
 
-void _glfwPlatformUpdateGamepadGUID(char* guid)
+void _glfwPlatformUpdateGamepadGUIDWin32(char* guid)
 {
     if (strcmp(guid + 20, "504944564944") == 0)
     {

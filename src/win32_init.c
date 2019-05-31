@@ -550,7 +550,7 @@ BOOL _glfwIsWindows10BuildOrGreaterWin32(WORD build)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+int _glfwPlatformInitWin32(void)
 {
     // To make SetForegroundWindow work as we want, we need to fiddle
     // with the FOREGROUNDLOCKTIMEOUT system setting (we do this as early
@@ -586,7 +586,7 @@ int _glfwPlatformInit(void)
     return GLFW_TRUE;
 }
 
-void _glfwPlatformTerminate(void)
+void _glfwPlatformTerminateWin32(void)
 {
     if (_glfw.win32.deviceNotificationHandle)
         UnregisterDeviceNotification(_glfw.win32.deviceNotificationHandle);
@@ -612,7 +612,7 @@ void _glfwPlatformTerminate(void)
     freeLibraries();
 }
 
-const char* _glfwPlatformGetVersionString(void)
+const char* _glfwPlatformGetVersionStringWin32(void)
 {
     return _GLFW_VERSION_NUMBER " Win32 WGL EGL OSMesa"
 #if defined(__MINGW32__)

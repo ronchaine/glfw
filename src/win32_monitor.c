@@ -336,11 +336,11 @@ void _glfwGetMonitorContentScaleWin32(HMONITOR handle, float* xscale, float* ysc
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-void _glfwPlatformFreeMonitor(_GLFWmonitor* monitor)
+void _glfwPlatformFreeMonitorWin32(_GLFWmonitor* monitor)
 {
 }
 
-void _glfwPlatformGetMonitorPos(_GLFWmonitor* monitor, int* xpos, int* ypos)
+void _glfwPlatformGetMonitorPosWin32(_GLFWmonitor* monitor, int* xpos, int* ypos)
 {
     DEVMODEW dm;
     ZeroMemory(&dm, sizeof(dm));
@@ -357,13 +357,13 @@ void _glfwPlatformGetMonitorPos(_GLFWmonitor* monitor, int* xpos, int* ypos)
         *ypos = dm.dmPosition.y;
 }
 
-void _glfwPlatformGetMonitorContentScale(_GLFWmonitor* monitor,
+void _glfwPlatformGetMonitorContentScaleWin32(_GLFWmonitor* monitor,
                                          float* xscale, float* yscale)
 {
     _glfwGetMonitorContentScaleWin32(monitor->win32.handle, xscale, yscale);
 }
 
-void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor,
+void _glfwPlatformGetMonitorWorkareaWin32(_GLFWmonitor* monitor,
                                      int* xpos, int* ypos,
                                      int* width, int* height)
 {
@@ -380,7 +380,7 @@ void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor,
         *height = mi.rcWork.bottom - mi.rcWork.top;
 }
 
-GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* count)
+GLFWvidmode* _glfwPlatformGetVideoModesWin32(_GLFWmonitor* monitor, int* count)
 {
     int modeIndex = 0, size = 0;
     GLFWvidmode* result = NULL;
@@ -457,7 +457,7 @@ GLFWvidmode* _glfwPlatformGetVideoModes(_GLFWmonitor* monitor, int* count)
     return result;
 }
 
-void _glfwPlatformGetVideoMode(_GLFWmonitor* monitor, GLFWvidmode* mode)
+void _glfwPlatformGetVideoModeWin32(_GLFWmonitor* monitor, GLFWvidmode* mode)
 {
     DEVMODEW dm;
     ZeroMemory(&dm, sizeof(dm));
@@ -474,7 +474,7 @@ void _glfwPlatformGetVideoMode(_GLFWmonitor* monitor, GLFWvidmode* mode)
                   &mode->blueBits);
 }
 
-GLFWbool _glfwPlatformGetGammaRamp(_GLFWmonitor* monitor, GLFWgammaramp* ramp)
+GLFWbool _glfwPlatformGetGammaRampWin32(_GLFWmonitor* monitor, GLFWgammaramp* ramp)
 {
     HDC dc;
     WORD values[3][256];
@@ -492,7 +492,7 @@ GLFWbool _glfwPlatformGetGammaRamp(_GLFWmonitor* monitor, GLFWgammaramp* ramp)
     return GLFW_TRUE;
 }
 
-void _glfwPlatformSetGammaRamp(_GLFWmonitor* monitor, const GLFWgammaramp* ramp)
+void _glfwPlatformSetGammaRampWin32(_GLFWmonitor* monitor, const GLFWgammaramp* ramp)
 {
     HDC dc;
     WORD values[3][256];

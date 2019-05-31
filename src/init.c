@@ -441,6 +441,15 @@ GLFWAPI int glfwInit(void)
             _glfw.platform = GLFW_PLATFORM_COCOA;
         #elif defined(_GLFW_WIN32)
             _glfw.platform = GLFW_PLATFORM_WIN32;
+        #elif defined(_GLFW_WAYLAND) && defined (_GLFW_X11)
+            const char* wayland_display = getenv("WAYLAND_DISPLAY");
+            const char* x11_display = getenv("DISPLAY");
+            if (wayland_display != NULL)
+            {
+                _glfw.platform = GLFW_PLATFORM_WAYLAND;
+            } else if (x11_display != NULL) {
+                _glfw.platform = GLFW_PLATFORM_X11;
+            }
         #elif defined(_GLFW_WAYLAND)
             _glfw.platform = GLFW_PLATFORM_WAYLAND;
         #elif defined(_GLFW_X11)

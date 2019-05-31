@@ -121,7 +121,7 @@ static GLFWbool chooseEGLConfig(const _GLFWctxconfig* ctxconfig,
             continue;
 
 #if defined(_GLFW_X11)
-        if (_glfw.backend == GLFW_PLATFORM_X11)
+        if (_glfw.platform == GLFW_PLATFORM_X11)
         {
             XVisualInfo vi = {0};
 
@@ -395,7 +395,7 @@ GLFWbool _glfwInitEGL(void)
         return GLFW_FALSE;
     }
 
-    switch(_glfw.backend)
+    switch(_glfw.platform)
     {
         #if defined(_GLFW_COCOA)
         case GLFW_PLATFORM_COCOA:
@@ -424,7 +424,7 @@ GLFWbool _glfwInitEGL(void)
         #endif
         default:
             _glfwInputError(GLFW_PLATFORM_ERROR,
-                            "EGL: Failed to determine backend");
+                            "EGL: Failed to determine platform");
             _glfwTerminateEGL();
             return GLFW_FALSE;
     }
@@ -633,7 +633,7 @@ GLFWbool _glfwCreateContextEGL(_GLFWwindow* window,
         setAttrib(EGL_NONE, EGL_NONE);
     }
 
-    switch(_glfw.backend)
+    switch(_glfw.platform)
     {
         #if defined(_GLFW_COCOA)
         case GLFW_PLATFORM_COCOA:

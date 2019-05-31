@@ -181,7 +181,6 @@ typedef void (APIENTRY * PFN_vkVoidFunction)(void);
 
 typedef enum _GLFWplatformname
 {
-  GLFW_PLATFORM_DEFAULT,
   GLFW_PLATFORM_COCOA,
   GLFW_PLATFORM_WIN32,
   GLFW_PLATFORM_X11,
@@ -270,6 +269,8 @@ struct _GLFWinitconfig
         GLFWbool  menubar;
         GLFWbool  chdir;
     } ns;
+
+    _GLFWplatformname platform;
 };
 
 // Window configuration
@@ -540,7 +541,7 @@ struct _GLFWmutex
 struct _GLFWlibrary
 {
     GLFWbool            initialized;
-    _GLFWplatformname   backend;
+    _GLFWplatformname   platform;
 
     struct {
         _GLFWinitconfig init;

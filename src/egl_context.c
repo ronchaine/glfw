@@ -121,23 +121,26 @@ static GLFWbool chooseEGLConfig(const _GLFWctxconfig* ctxconfig,
             continue;
 
 #if defined(_GLFW_X11)
-        XVisualInfo vi = {0};
-
-        // Only consider EGLConfigs with associated Visuals
-        vi.visualid = getEGLConfigAttrib(n, EGL_NATIVE_VISUAL_ID);
-        if (!vi.visualid)
-            continue;
-
-        if (desired->transparent)
+        if (_glfw.backend == GLFW_PLATFORM_X11)
         {
-            int count;
-            XVisualInfo* vis = XGetVisualInfo(_glfw.x11.display,
-                                              VisualIDMask, &vi,
-                                              &count);
-            if (vis)
+            XVisualInfo vi = {0};
+
+            // Only consider EGLConfigs with associated Visuals
+            vi.visualid = getEGLConfigAttrib(n, EGL_NATIVE_VISUAL_ID);
+            if (!vi.visualid)
+                continue;
+
+            if (desired->transparent)
             {
-                u->transparent = _glfwIsVisualTransparentX11(vis[0].visual);
-                XFree(vis);
+                int count;
+                XVisualInfo* vis = XGetVisualInfo(_glfw.x11.display,
+                                                  VisualIDMask, &vi,
+                                                  &count);
+                if (vis)
+                {
+                    u->transparent = _glfwIsVisualTransparentX11(vis[0].visual);
+                    XFree(vis);
+                }
             }
         }
 #endif // _GLFW_X11

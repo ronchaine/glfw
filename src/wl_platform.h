@@ -89,6 +89,12 @@ typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR
 #define _GLFW_WL_PLATFORM_CONTEXT_STATE         struct { int dummyContext; }
 #define _GLFW_WL_PLATFORM_LIBRARY_CONTEXT_STATE struct { int dummyLibraryContext; }
 
+#ifndef _GLFW_DEFAULT_PLATFORM_FUNCTIONS
+#define _GLFW_DEFAULT_PLATFORM              GLFW_PLATFORM_WAYLAND
+#define _GLFW_DEFAULT_PLATFORM_FUNCTIONS    _glfwFunctionsWayland
+#warning Using wayland
+#endif
+
 struct wl_cursor_image {
     uint32_t width;
     uint32_t height;
@@ -375,19 +381,167 @@ int  _glfwPlatformInitWayland(void);
 void _glfwPlatformTerminateWayland(void);
 const char* _glfwPlatformGetVersionStringWayland(void);
 
+// monitor
+void _glfwPlatformFreeMonitorWayland(_GLFWmonitor* monitor);
+void _glfwPlatformGetMonitorPosWayland(_GLFWmonitor* monitor, int* xpos, int* ypos);
+void _glfwPlatformGetMonitorContentScaleWayland(_GLFWmonitor* monitor,
+                                            float* xscale, float* yscale);
+void _glfwPlatformGetMonitorWorkareaWayland(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height);
+GLFWvidmode* _glfwPlatformGetVideoModesWayland(_GLFWmonitor* monitor, int* count);
+void _glfwPlatformGetVideoModeWayland(_GLFWmonitor* monitor, GLFWvidmode* mode);
+GLFWbool _glfwPlatformGetGammaRampWayland(_GLFWmonitor* monitor, GLFWgammaramp* ramp);
+void _glfwPlatformSetGammaRampWayland(_GLFWmonitor* monitor, const GLFWgammaramp* ramp);
+
 // window
 int _glfwPlatformCreateWindowWayland(_GLFWwindow* window,
                                      const _GLFWwndconfig* wndconfig,
                                      const _GLFWctxconfig* ctxconfig,
                                      const _GLFWfbconfig* fbconfig);
+void _glfwPlatformDestroyWindowWayland(_GLFWwindow* window);
+void _glfwPlatformSetWindowTitleWayland(_GLFWwindow* window, const char* title);
+void _glfwPlatformSetWindowIconWayland(_GLFWwindow* window, int count, const GLFWimage* images);
+void _glfwPlatformGetWindowPosWayland(_GLFWwindow* window, int* xpos, int* ypos);
+void _glfwPlatformSetWindowPosWayland(_GLFWwindow* window, int xpos, int ypos);
+void _glfwPlatformGetWindowSizeWayland(_GLFWwindow* window, int* width, int* height);
+void _glfwPlatformSetWindowSizeWayland(_GLFWwindow* window, int width, int height);
+void _glfwPlatformSetWindowSizeLimitsWayland(_GLFWwindow* window,
+                                             int minwidth, int minheight,
+                                             int maxwidth, int maxheight);
+void _glfwPlatformSetWindowAspectRatioWayland(_GLFWwindow* window, int numer, int denom);
+void _glfwPlatformGetFramebufferSizeWayland(_GLFWwindow* window, int* width, int* height);
+void _glfwPlatformGetWindowFrameSizeWayland(_GLFWwindow* window,
+                                            int* left, int* top,
+                                            int* right, int* bottom);
+void _glfwPlatformGetWindowContentScaleWayland(_GLFWwindow* window, float* xscale, float* yscale);
+void _glfwPlatformIconifyWindowWayland(_GLFWwindow* window);
+void _glfwPlatformRestoreWindowWayland(_GLFWwindow* window);
+void _glfwPlatformMaximizeWindowWayland(_GLFWwindow* window);
+void _glfwPlatformShowWindowWayland(_GLFWwindow* window);
+void _glfwPlatformHideWindowWayland(_GLFWwindow* window);
+void _glfwPlatformRequestWindowAttentionWayland(_GLFWwindow* window);
+void _glfwPlatformFocusWindowWayland(_GLFWwindow* window);
+void _glfwPlatformSetWindowMonitorWayland(_GLFWwindow* window,
+                                          _GLFWmonitor* monitor,
+                                          int xpos, int ypos,
+                                          int width, int height,
+                                          int refreshRate);
+int _glfwPlatformCreateCursorWayland(_GLFWcursor* cursor,
+                                     const GLFWimage* image,
+                                     int xhot, int yhot);
+int _glfwPlatformWindowFocusedWayland(_GLFWwindow* window);
+int _glfwPlatformWindowIconifiedWayland(_GLFWwindow* window);
+int _glfwPlatformWindowVisibleWayland(_GLFWwindow* window);
+int _glfwPlatformWindowMaximizedWayland(_GLFWwindow* window);
+int _glfwPlatformWindowHoveredWayland(_GLFWwindow* window);
+int _glfwPlatformFramebufferTransparentWayland(_GLFWwindow* window);
+void _glfwPlatformSetWindowResizableWayland(_GLFWwindow* window, GLFWbool enabled);
+void _glfwPlatformSetWindowDecoratedWayland(_GLFWwindow* window, GLFWbool enabled);
+void _glfwPlatformSetWindowFloatingWayland(_GLFWwindow* window, GLFWbool enabled);
+float _glfwPlatformGetWindowOpacityWayland(_GLFWwindow* window);
+void _glfwPlatformSetWindowOpacityWayland(_GLFWwindow* window, float opacity);
+void _glfwPlatformSetRawMouseMotionWayland(_GLFWwindow *window, GLFWbool enabled);
+GLFWbool _glfwPlatformRawMouseMotionSupportedWayland(void);
+void _glfwPlatformPollEventsWayland(void);
+void _glfwPlatformWaitEventsWayland(void);
+void _glfwPlatformWaitEventsTimeoutWayland(double timeout);
+void _glfwPlatformPostEmptyEventWayland(void);
+void _glfwPlatformGetCursorPosWayland(_GLFWwindow* window, double* xpos, double* ypos);
+void _glfwPlatformSetCursorPosWayland(_GLFWwindow* window, double x, double y);
+void _glfwPlatformSetCursorModeWayland(_GLFWwindow* window, int mode);
+const char* _glfwPlatformGetScancodeNameWayland(int scancode);
+int _glfwPlatformGetKeyScancodeWayland(int key);
+int _glfwPlatformCreateStandardCursorWayland(_GLFWcursor* cursor, int shape);
+void _glfwPlatformDestroyCursorWayland(_GLFWcursor* cursor);
 void _glfwPlatformSetCursorWayland(_GLFWwindow* window, _GLFWcursor* cursor);
+void _glfwPlatformSetClipboardStringWayland(const char* string);
+const char* _glfwPlatformGetClipboardStringWayland(void);
+void _glfwPlatformGetRequiredInstanceExtensionsWayland(char** extensions);
+int _glfwPlatformGetPhysicalDevicePresentationSupportWayland(VkInstance instance,
+                                                             VkPhysicalDevice device,
+                                                             uint32_t queuefamily);
+VkResult _glfwPlatformCreateWindowSurfaceWayland(VkInstance instance,
+                                                 _GLFWwindow* window,
+                                                 const VkAllocationCallbacks* allocator,
+                                                 VkSurfaceKHR* surface);
 
 static const struct _GLFWplatformfunctions _glfwFunctionsWayland = {
     ._glfwPlatformInitFunc = _glfwPlatformInitWayland,
     ._glfwPlatformTerminateFunc = _glfwPlatformTerminateWayland,
     ._glfwPlatformGetVersionStringFunc = _glfwPlatformGetVersionStringWayland,
 
+    ._glfwPlatformFreeMonitorFunc = _glfwPlatformFreeMonitorWayland,
+    ._glfwPlatformGetMonitorPosFunc = _glfwPlatformGetMonitorPosWayland,
+    ._glfwPlatformGetMonitorContentScaleFunc = _glfwPlatformGetMonitorContentScaleWayland,
+    ._glfwPlatformGetMonitorWorkareaFunc = _glfwPlatformGetMonitorWorkareaWayland,
+    ._glfwPlatformGetVideoModesFunc = _glfwPlatformGetVideoModesWayland,
+    ._glfwPlatformGetVideoModeFunc = _glfwPlatformGetVideoModeWayland,
+    ._glfwPlatformGetGammaRampFunc = _glfwPlatformGetGammaRampWayland,
+    ._glfwPlatformSetGammaRampFunc = _glfwPlatformSetGammaRampWayland,
+
     ._glfwPlatformCreateWindowFunc = _glfwPlatformCreateWindowWayland,
+    ._glfwPlatformDestroyWindowFunc = _glfwPlatformDestroyWindowWayland,
+    ._glfwPlatformSetWindowTitleFunc = _glfwPlatformSetWindowTitleWayland,
+    ._glfwPlatformSetWindowIconFunc = _glfwPlatformSetWindowIconWayland,
+    ._glfwPlatformGetWindowPosFunc = _glfwPlatformGetWindowPosWayland,
+    ._glfwPlatformSetWindowPosFunc = _glfwPlatformSetWindowPosWayland,
+    ._glfwPlatformGetWindowSizeFunc = _glfwPlatformGetWindowSizeWayland,
+    ._glfwPlatformSetWindowSizeFunc = _glfwPlatformSetWindowSizeWayland,
+    ._glfwPlatformSetWindowSizeLimitsFunc = _glfwPlatformSetWindowSizeLimitsWayland,
+    ._glfwPlatformSetWindowAspectRatioFunc = _glfwPlatformSetWindowAspectRatioWayland,
+    ._glfwPlatformGetFramebufferSizeFunc = _glfwPlatformGetFramebufferSizeWayland,
+    ._glfwPlatformGetWindowFrameSizeFunc = _glfwPlatformGetWindowFrameSizeWayland,
+    ._glfwPlatformGetWindowContentScaleFunc = _glfwPlatformGetWindowContentScaleWayland,
+    ._glfwPlatformIconifyWindowFunc = _glfwPlatformIconifyWindowWayland,
+    ._glfwPlatformRestoreWindowFunc = _glfwPlatformRestoreWindowWayland,
+    ._glfwPlatformMaximizeWindowFunc = _glfwPlatformMaximizeWindowWayland,
+    ._glfwPlatformShowWindowFunc = _glfwPlatformShowWindowWayland,
+    ._glfwPlatformHideWindowFunc = _glfwPlatformHideWindowWayland,
+    ._glfwPlatformRequestWindowAttentionFunc = _glfwPlatformRequestWindowAttentionWayland,
+    ._glfwPlatformFocusWindowFunc = _glfwPlatformFocusWindowWayland,
+    ._glfwPlatformSetWindowMonitorFunc = _glfwPlatformSetWindowMonitorWayland,
+    ._glfwPlatformCreateCursorFunc = _glfwPlatformCreateCursorWayland,
+    ._glfwPlatformWindowFocusedFunc = _glfwPlatformWindowFocusedWayland,
+    ._glfwPlatformWindowIconifiedFunc = _glfwPlatformWindowIconifiedWayland,
+    ._glfwPlatformWindowVisibleFunc =  _glfwPlatformWindowVisibleWayland,
+    ._glfwPlatformWindowMaximizedFunc = _glfwPlatformWindowMaximizedWayland,
+    ._glfwPlatformWindowHoveredFunc = _glfwPlatformWindowHoveredWayland,
+    ._glfwPlatformFramebufferTransparentFunc = _glfwPlatformFramebufferTransparentWayland,
+    ._glfwPlatformSetWindowResizableFunc = _glfwPlatformSetWindowResizableWayland,
+    ._glfwPlatformSetWindowDecoratedFunc = _glfwPlatformSetWindowDecoratedWayland,
+    ._glfwPlatformSetWindowFloatingFunc = _glfwPlatformSetWindowFloatingWayland,
+    ._glfwPlatformGetWindowOpacityFunc = _glfwPlatformGetWindowOpacityWayland,
+    ._glfwPlatformSetWindowOpacityFunc = _glfwPlatformSetWindowOpacityWayland,
+    ._glfwPlatformSetRawMouseMotionFunc = _glfwPlatformSetRawMouseMotionWayland,
+    ._glfwPlatformRawMouseMotionSupportedFunc = _glfwPlatformRawMouseMotionSupportedWayland,
+    ._glfwPlatformPollEventsFunc = _glfwPlatformPollEventsWayland,
+    ._glfwPlatformWaitEventsFunc = _glfwPlatformWaitEventsWayland,
+    ._glfwPlatformWaitEventsTimeoutFunc = _glfwPlatformWaitEventsTimeoutWayland,
+    ._glfwPlatformPostEmptyEventFunc = _glfwPlatformPostEmptyEventWayland,
+    ._glfwPlatformGetCursorPosFunc = _glfwPlatformGetCursorPosWayland,
+    ._glfwPlatformSetCursorPosFunc = _glfwPlatformSetCursorPosWayland,
+    ._glfwPlatformSetCursorModeFunc = _glfwPlatformSetCursorModeWayland,
+    ._glfwPlatformGetScancodeNameFunc = _glfwPlatformGetScancodeNameWayland,
+    ._glfwPlatformGetKeyScancodeFunc = _glfwPlatformGetKeyScancodeWayland,
+    ._glfwPlatformCreateStandardCursorFunc = _glfwPlatformCreateStandardCursorWayland,
+    ._glfwPlatformDestroyCursorFunc = _glfwPlatformDestroyCursorWayland,
     ._glfwPlatformSetCursorFunc = _glfwPlatformSetCursorWayland,
+    ._glfwPlatformSetClipboardStringFunc = _glfwPlatformSetClipboardStringWayland,
+    ._glfwPlatformGetClipboardStringFunc = _glfwPlatformGetClipboardStringWayland,
+    ._glfwPlatformGetRequiredInstanceExtensionsFunc = _glfwPlatformGetRequiredInstanceExtensionsWayland,
+    ._glfwPlatformGetPhysicalDevicePresentationSupportFunc = _glfwPlatformGetPhysicalDevicePresentationSupportWayland,
+    ._glfwPlatformCreateWindowSurfaceFunc = _glfwPlatformCreateWindowSurfaceWayland,
+
+    ._glfwPlatformCreateTlsFunc = _glfwPlatformCreateTlsPosix,
+    ._glfwPlatformDestroyTlsFunc = _glfwPlatformDestroyTlsPosix,
+    ._glfwPlatformGetTlsFunc = _glfwPlatformGetTlsPosix,
+    ._glfwPlatformSetTlsFunc = _glfwPlatformSetTlsPosix,
+
+    ._glfwPlatformCreateMutexFunc = _glfwPlatformCreateMutexPosix,
+    ._glfwPlatformDestroyMutexFunc = _glfwPlatformDestroyMutexPosix,
+    ._glfwPlatformLockMutexFunc = _glfwPlatformLockMutexPosix,
+    ._glfwPlatformUnlockMutexFunc = _glfwPlatformUnlockMutexPosix,
+
+    ._glfwPlatformGetTimerValueFunc = _glfwPlatformGetTimerValuePosix,
+    ._glfwPlatformGetTimerFrequencyFunc = _glfwPlatformGetTimerFrequencyPosix,
 };
 

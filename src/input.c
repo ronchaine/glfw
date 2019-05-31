@@ -247,7 +247,7 @@ static GLFWbool parseMapping(_GLFWmapping* mapping, const char* string)
             mapping->guid[i] += 'a' - 'A';
     }
 
-    _glfwPlatformUpdateGamepadGUID(mapping->guid);
+    //_glfwPlatformUpdateGamepadGUID(mapping->guid);
     return GLFW_TRUE;
 }
 

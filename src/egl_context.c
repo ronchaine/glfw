@@ -424,7 +424,7 @@ GLFWbool _glfwInitEGL(void)
         #endif
         default:
             _glfwInputError(GLFW_PLATFORM_ERROR,
-                            "EGL: Failed to");
+                            "EGL: Failed to determine backend");
             _glfwTerminateEGL();
             return GLFW_FALSE;
     }

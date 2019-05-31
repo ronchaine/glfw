@@ -518,7 +518,7 @@ static void xdgToplevelHandleConfigure(void* data,
         }
 
         _glfwInputWindowSize(window, width, height);
-        _glfwPlatformSetWindowSize(window, width, height);
+        _glfwPlatformSetWindowSizeWayland(window, width, height);
         _glfwInputWindowDamage(window);
     }
 
@@ -526,7 +526,7 @@ static void xdgToplevelHandleConfigure(void* data,
     {
         if (!activated || !fullscreen)
         {
-            _glfwPlatformIconifyWindow(window);
+            _glfwPlatformIconifyWindowWayland(window);
             window->wl.wasFullscreen = GLFW_FALSE;
         }
     }

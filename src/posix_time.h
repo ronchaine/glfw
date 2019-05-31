@@ -44,3 +44,5 @@ typedef struct _GLFWtimerPOSIX
 
 void _glfwInitTimerPOSIX(void);
 
+uint64_t _glfwPlatformGetTimerValuePosix(void);
+uint64_t _glfwPlatformGetTimerFrequencyPosix(void);

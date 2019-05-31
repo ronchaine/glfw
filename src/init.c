@@ -57,10 +57,111 @@ static _GLFWinitconfig _glfwInitHints =
     }
 };
 
-// GLFW functions platform functions defined in this file
+// Declare GLFW platform functions in this file
 int  (*_glfwPlatformInit)(void);
 void (*_glfwPlatformTerminate)(void);
 const char* (*_glfwPlatformGetVersionString)(void);
+
+void (*_glfwPlatformGetCursorPos)(_GLFWwindow* window, double* xpos, double* ypos);
+void (*_glfwPlatformSetCursorPos)(_GLFWwindow* window, double xpos, double ypos);
+void (*_glfwPlatformSetCursorMode)(_GLFWwindow* window, int mode);
+void (*_glfwPlatformSetRawMouseMotion)(_GLFWwindow *window, GLFWbool enabled);
+GLFWbool (*_glfwPlatformRawMouseMotionSupported)(void);
+int (*_glfwPlatformCreateCursor)(_GLFWcursor* cursor,
+                                 const GLFWimage* image, int xhot, int yhot);
+int (*_glfwPlatformCreateStandardCursor)(_GLFWcursor* cursor, int shape);
+void (*_glfwPlatformDestroyCursor)(_GLFWcursor* cursor);
+void (*_glfwPlatformSetCursor)(_GLFWwindow* window, _GLFWcursor* cursor);
+
+const char* (*_glfwPlatformGetScancodeName)(int scancode);
+int (*_glfwPlatformGetKeyScancode)(int key);
+
+void (*_glfwPlatformFreeMonitor)(_GLFWmonitor* monitor);
+void (*_glfwPlatformGetMonitorPos)(_GLFWmonitor* monitor, int* xpos, int* ypos);
+void (*_glfwPlatformGetMonitorContentScale)(_GLFWmonitor* monitor,
+                                            float* xscale, float* yscale);
+void (*_glfwPlatformGetMonitorWorkarea)(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height);
+GLFWvidmode* (*_glfwPlatformGetVideoModes)(_GLFWmonitor* monitor, int* count);
+void (*_glfwPlatformGetVideoMode)(_GLFWmonitor* monitor, GLFWvidmode* mode);
+GLFWbool (*_glfwPlatformGetGammaRamp)(_GLFWmonitor* monitor, GLFWgammaramp* ramp);
+void (*_glfwPlatformSetGammaRamp)(_GLFWmonitor* monitor, const GLFWgammaramp* ramp);
+
+void (*_glfwPlatformSetClipboardString)(const char* string);
+const char* (*_glfwPlatformGetClipboardString)(void);
+
+int (*_glfwPlatformPollJoystick)(_GLFWjoystick* js, int mode);
+void (*_glfwPlatformUpdateGamepadGUID)(char* guid);
+
+uint64_t (*_glfwPlatformGetTimerValue)(void);
+uint64_t (*_glfwPlatformGetTimerFrequency)(void);
+
+int (*_glfwPlatformCreateWindow)(_GLFWwindow* window,
+                                 const _GLFWwndconfig* wndconfig,
+                                 const _GLFWctxconfig* ctxconfig,
+                                 const _GLFWfbconfig* fbconfig);
+void (*_glfwPlatformDestroyWindow)(_GLFWwindow* window);
+void (*_glfwPlatformSetWindowTitle)(_GLFWwindow* window, const char* title);
+void (*_glfwPlatformSetWindowIcon)(_GLFWwindow* window,
+                                   int count, const GLFWimage* images);
+void (*_glfwPlatformGetWindowPos)(_GLFWwindow* window, int* xpos, int* ypos);
+void (*_glfwPlatformSetWindowPos)(_GLFWwindow* window, int xpos, int ypos);
+void (*_glfwPlatformGetWindowSize)(_GLFWwindow* window, int* width, int* height);
+void (*_glfwPlatformSetWindowSize)(_GLFWwindow* window, int width, int height);
+void (*_glfwPlatformSetWindowSizeLimits)(_GLFWwindow* window,
+                                         int minwidth, int minheight,
+                                         int maxwidth, int maxheight);
+void (*_glfwPlatformSetWindowAspectRatio)(_GLFWwindow* window, int numer, int denom);
+void (*_glfwPlatformGetFramebufferSize)(_GLFWwindow* window, int* width, int* height);
+void (*_glfwPlatformGetWindowFrameSize)(_GLFWwindow* window,
+                                        int* left, int* top,
+                                        int* right, int* bottom);
+void (*_glfwPlatformGetWindowContentScale)(_GLFWwindow* window,
+                                           float* xscale, float* yscale);
+void (*_glfwPlatformIconifyWindow)(_GLFWwindow* window);
+void (*_glfwPlatformRestoreWindow)(_GLFWwindow* window);
+void (*_glfwPlatformMaximizeWindow)(_GLFWwindow* window);
+void (*_glfwPlatformShowWindow)(_GLFWwindow* window);
+void (*_glfwPlatformHideWindow)(_GLFWwindow* window);
+void (*_glfwPlatformRequestWindowAttention)(_GLFWwindow* window);
+void (*_glfwPlatformFocusWindow)(_GLFWwindow* window);
+void (*_glfwPlatformSetWindowMonitor)(_GLFWwindow* window, _GLFWmonitor* monitor,
+                                      int xpos, int ypos, int width, int height,
+                                      int refreshRate);
+int (*_glfwPlatformWindowFocused)(_GLFWwindow* window);
+int (*_glfwPlatformWindowIconified)(_GLFWwindow* window);
+int (*_glfwPlatformWindowVisible)(_GLFWwindow* window);
+int (*_glfwPlatformWindowMaximized)(_GLFWwindow* window);
+int (*_glfwPlatformWindowHovered)(_GLFWwindow* window);
+int (*_glfwPlatformFramebufferTransparent)(_GLFWwindow* window);
+float (*_glfwPlatformGetWindowOpacity)(_GLFWwindow* window);
+void (*_glfwPlatformSetWindowResizable)(_GLFWwindow* window, GLFWbool enabled);
+void (*_glfwPlatformSetWindowDecorated)(_GLFWwindow* window, GLFWbool enabled);
+void (*_glfwPlatformSetWindowFloating)(_GLFWwindow* window, GLFWbool enabled);
+void (*_glfwPlatformSetWindowOpacity)(_GLFWwindow* window, float opacity);
+
+void (*_glfwPlatformPollEvents)(void);
+void (*_glfwPlatformWaitEvents)(void);
+void (*_glfwPlatformWaitEventsTimeout)(double timeout);
+void (*_glfwPlatformPostEmptyEvent)(void);
+
+void (*_glfwPlatformGetRequiredInstanceExtensions)(char** extensions);
+int (*_glfwPlatformGetPhysicalDevicePresentationSupport)(VkInstance instance,
+                                                         VkPhysicalDevice device,
+                                                         uint32_t queuefamily);
+VkResult (*_glfwPlatformCreateWindowSurface)(VkInstance instance,
+                                             _GLFWwindow* window,
+                                             const VkAllocationCallbacks* allocator,
+                                             VkSurfaceKHR* surface);
+
+GLFWbool (*_glfwPlatformCreateTls)(_GLFWtls* tls);
+void (*_glfwPlatformDestroyTls)(_GLFWtls* tls);
+void* (*_glfwPlatformGetTls)(_GLFWtls* tls);
+void (*_glfwPlatformSetTls)(_GLFWtls* tls, void* value);
+
+GLFWbool (*_glfwPlatformCreateMutex)(_GLFWmutex* mutex);
+void (*_glfwPlatformDestroyMutex)(_GLFWmutex* mutex);
+void (*_glfwPlatformLockMutex)(_GLFWmutex* mutex);
+void (*_glfwPlatformUnlockMutex)(_GLFWmutex* mutex);
 
 // Terminate the library
 //
@@ -111,11 +212,186 @@ static void terminate(void)
     memset(&_glfw, 0, sizeof(_glfw));
 }
 
-void _glfwPlatformLoadFunctions(_GLFWplatformfunctions funcs)
+GLFWbool _glfwPlatformLoadFunctions(_GLFWplatformfunctions funcs)
 {
     _glfwPlatformInit = funcs._glfwPlatformInitFunc;
     _glfwPlatformTerminate = funcs._glfwPlatformTerminateFunc;
     _glfwPlatformGetVersionString = funcs._glfwPlatformGetVersionStringFunc;
+
+    _glfwPlatformFreeMonitor = funcs._glfwPlatformFreeMonitorFunc;
+    _glfwPlatformGetMonitorPos = funcs._glfwPlatformGetMonitorPosFunc;
+    _glfwPlatformGetMonitorContentScale = funcs._glfwPlatformGetMonitorContentScaleFunc;
+    _glfwPlatformGetMonitorWorkarea = funcs._glfwPlatformGetMonitorWorkareaFunc;
+    _glfwPlatformGetVideoModes = funcs._glfwPlatformGetVideoModesFunc;
+    _glfwPlatformGetVideoMode = funcs._glfwPlatformGetVideoModeFunc;
+    _glfwPlatformGetGammaRamp = funcs._glfwPlatformGetGammaRampFunc;
+    _glfwPlatformSetGammaRamp = funcs._glfwPlatformSetGammaRampFunc;
+
+    _glfwPlatformGetCursorPos = funcs._glfwPlatformGetCursorPosFunc;
+    _glfwPlatformSetCursorPos = funcs._glfwPlatformSetCursorPosFunc;
+    _glfwPlatformSetCursorMode = funcs._glfwPlatformSetCursorModeFunc;
+    _glfwPlatformSetRawMouseMotion = funcs._glfwPlatformSetRawMouseMotionFunc;
+    _glfwPlatformRawMouseMotionSupported = funcs._glfwPlatformRawMouseMotionSupportedFunc;
+    _glfwPlatformCreateCursor = funcs._glfwPlatformCreateCursorFunc;
+    _glfwPlatformCreateStandardCursor = funcs._glfwPlatformCreateStandardCursorFunc;
+    _glfwPlatformDestroyCursor = funcs._glfwPlatformDestroyCursorFunc;
+    _glfwPlatformSetCursor = funcs._glfwPlatformSetCursorFunc;
+
+    _glfwPlatformGetScancodeName = funcs._glfwPlatformGetScancodeNameFunc;
+    _glfwPlatformGetKeyScancode = funcs._glfwPlatformGetKeyScancodeFunc;
+
+    _glfwPlatformSetClipboardString = funcs._glfwPlatformSetClipboardStringFunc;
+    _glfwPlatformGetClipboardString = funcs._glfwPlatformGetClipboardStringFunc;
+
+    _glfwPlatformPollJoystick = funcs._glfwPlatformPollJoystickFunc;
+    _glfwPlatformUpdateGamepadGUID = funcs._glfwPlatformUpdateGamepadGUIDFunc;
+
+    _glfwPlatformGetTimerValue = funcs._glfwPlatformGetTimerValueFunc;
+    _glfwPlatformGetTimerFrequency = funcs._glfwPlatformGetTimerFrequencyFunc;
+
+    _glfwPlatformCreateWindow = funcs._glfwPlatformCreateWindowFunc;
+    _glfwPlatformDestroyWindow = funcs._glfwPlatformDestroyWindowFunc;
+    _glfwPlatformSetWindowTitle = funcs._glfwPlatformSetWindowTitleFunc;
+    _glfwPlatformSetWindowIcon = funcs._glfwPlatformSetWindowIconFunc;
+    _glfwPlatformGetWindowPos = funcs._glfwPlatformGetWindowPosFunc;
+    _glfwPlatformSetWindowPos = funcs._glfwPlatformSetWindowPosFunc;
+    _glfwPlatformGetWindowSize = funcs._glfwPlatformGetWindowSizeFunc;
+    _glfwPlatformSetWindowSize = funcs._glfwPlatformSetWindowSizeFunc;
+    _glfwPlatformSetWindowSizeLimits = funcs._glfwPlatformSetWindowSizeLimitsFunc;
+    _glfwPlatformSetWindowAspectRatio = funcs._glfwPlatformSetWindowAspectRatioFunc;
+    _glfwPlatformGetFramebufferSize = funcs._glfwPlatformGetFramebufferSizeFunc;
+    _glfwPlatformGetWindowFrameSize = funcs._glfwPlatformGetWindowFrameSizeFunc;
+    _glfwPlatformGetWindowContentScale = funcs._glfwPlatformGetWindowContentScaleFunc;
+    _glfwPlatformIconifyWindow = funcs._glfwPlatformIconifyWindowFunc;
+    _glfwPlatformRestoreWindow = funcs._glfwPlatformRestoreWindowFunc;
+    _glfwPlatformMaximizeWindow = funcs._glfwPlatformMaximizeWindowFunc;
+    _glfwPlatformShowWindow = funcs._glfwPlatformShowWindowFunc;
+    _glfwPlatformHideWindow = funcs._glfwPlatformHideWindowFunc;
+    _glfwPlatformRequestWindowAttention = funcs._glfwPlatformRequestWindowAttentionFunc;
+    _glfwPlatformFocusWindow = funcs._glfwPlatformFocusWindowFunc;
+    _glfwPlatformSetWindowMonitor = funcs._glfwPlatformSetWindowMonitorFunc;
+    _glfwPlatformWindowFocused = funcs._glfwPlatformWindowFocusedFunc;
+    _glfwPlatformWindowIconified = funcs._glfwPlatformWindowIconifiedFunc;
+    _glfwPlatformWindowVisible = funcs._glfwPlatformWindowVisibleFunc;
+    _glfwPlatformWindowMaximized = funcs._glfwPlatformWindowMaximizedFunc;
+    _glfwPlatformWindowHovered = funcs._glfwPlatformWindowHoveredFunc;
+    _glfwPlatformFramebufferTransparent = funcs._glfwPlatformFramebufferTransparentFunc;
+    _glfwPlatformGetWindowOpacity = funcs._glfwPlatformGetWindowOpacityFunc;
+    _glfwPlatformSetWindowResizable = funcs._glfwPlatformSetWindowResizableFunc;
+    _glfwPlatformSetWindowDecorated = funcs._glfwPlatformSetWindowDecoratedFunc;
+    _glfwPlatformSetWindowFloating = funcs._glfwPlatformSetWindowFloatingFunc;
+    _glfwPlatformSetWindowOpacity = funcs._glfwPlatformSetWindowOpacityFunc;
+
+    _glfwPlatformPollEvents = funcs._glfwPlatformPollEventsFunc;
+    _glfwPlatformWaitEvents = funcs._glfwPlatformWaitEventsFunc;
+    _glfwPlatformWaitEventsTimeout = funcs._glfwPlatformWaitEventsTimeoutFunc;
+    _glfwPlatformPostEmptyEvent = funcs._glfwPlatformPostEmptyEventFunc;
+
+    _glfwPlatformGetRequiredInstanceExtensions = funcs._glfwPlatformGetRequiredInstanceExtensionsFunc;
+    _glfwPlatformGetPhysicalDevicePresentationSupport = funcs._glfwPlatformGetPhysicalDevicePresentationSupportFunc;
+    _glfwPlatformCreateWindowSurface = funcs._glfwPlatformCreateWindowSurfaceFunc;
+
+    _glfwPlatformCreateTls = funcs._glfwPlatformCreateTlsFunc;
+    _glfwPlatformDestroyTls = funcs._glfwPlatformDestroyTlsFunc;
+    _glfwPlatformGetTls = funcs._glfwPlatformGetTlsFunc;
+    _glfwPlatformSetTls = funcs._glfwPlatformSetTlsFunc;
+
+    _glfwPlatformCreateMutex = funcs._glfwPlatformCreateMutexFunc;
+    _glfwPlatformDestroyMutex = funcs._glfwPlatformDestroyMutexFunc;
+    _glfwPlatformLockMutex = funcs._glfwPlatformLockMutexFunc;
+    _glfwPlatformUnlockMutex = funcs._glfwPlatformUnlockMutexFunc;
+
+    _glfwPlatformGetTimerValue = funcs._glfwPlatformGetTimerValueFunc;
+    _glfwPlatformGetTimerFrequency = funcs._glfwPlatformGetTimerFrequencyFunc;
+    /*
+    if (_glfwPlatformInit == NULL)
+    if (_glfwPlatformTerminate == NULL)
+    if (_glfwPlatformGetVersionString == NULL)
+
+    if (_glfwPlatformFreeMonitor == NULL)
+    if (_glfwPlatformGetMonitorPos == NULL)
+    if (_glfwPlatformGetMonitorContentScale == NULL)
+    if (_glfwPlatformGetMonitorWorkarea == NULL)
+    if (_glfwPlatformGetVideoModes == NULL)
+    if (_glfwPlatformGetVideoMode == NULL)
+    if (_glfwPlatformGetGammaRamp == NULL)
+    if (_glfwPlatformSetGammaRamp == NULL)
+
+    if (_glfwPlatformGetCursorPos == NULL)
+    if (_glfwPlatformSetCursorPos == NULL)
+    if (_glfwPlatformSetCursorMode == NULL)
+    if (_glfwPlatformSetRawMouseMotion == NULL)
+    if (_glfwPlatformRawMouseMotionSupported == NULL)
+    if (_glfwPlatformCreateCursor == NULL)
+    if (_glfwPlatformCreateStandardCursor == NULL)
+    if (_glfwPlatformDestroyCursor == NULL)
+    if (_glfwPlatformSetCursor == NULL)
+
+    if (_glfwPlatformGetScancodeName == NULL)
+    if (_glfwPlatformGetKeyScancode == NULL)
+
+    if (_glfwPlatformSetClipboardString == NULL)
+    if (_glfwPlatformGetClipboardString == NULL)
+
+    if (_glfwPlatformPollJoystick == NULL)
+    if (_glfwPlatformUpdateGamepadGUID == NULL)
+
+    if (_glfwPlatformGetTimerValue == NULL)
+    if (_glfwPlatformGetTimerFrequency == NULL)
+
+    if (_glfwPlatformCreateWindow == NULL)
+    if (_glfwPlatformDestroyWindow == NULL)
+    if (_glfwPlatformSetWindowTitle == NULL)
+    if (_glfwPlatformSetWindowIcon == NULL)
+    if (_glfwPlatformGetWindowPos == NULL)
+    if (_glfwPlatformSetWindowPos == NULL)
+    if (_glfwPlatformGetWindowSize == NULL)
+    if (_glfwPlatformSetWindowSize == NULL)
+    if (_glfwPlatformSetWindowSizeLimits == NULL)
+    if (_glfwPlatformSetWindowAspectRatio == NULL)
+    if (_glfwPlatformGetFramebufferSize = funcs._glfwPlatformGetFramebufferSizeFunc;
+    if (_glfwPlatformGetWindowFrameSize = funcs._glfwPlatformGetWindowFrameSizeFunc;
+    if (_glfwPlatformGetWindowContentScale = funcs._glfwPlatformGetWindowContentScaleFunc;
+    if (_glfwPlatformIconifyWindow = funcs._glfwPlatformIconifyWindowFunc;
+    if (_glfwPlatformRestoreWindow = funcs._glfwPlatformRestoreWindowFunc;
+    if (_glfwPlatformMaximizeWindow = funcs._glfwPlatformMaximizeWindowFunc;
+    if (_glfwPlatformShowWindow = funcs._glfwPlatformShowWindowFunc;
+    if (_glfwPlatformHideWindow = funcs._glfwPlatformHideWindowFunc;
+    if (_glfwPlatformRequestWindowAttention = funcs._glfwPlatformRequestWindowAttentionFunc;
+    if (_glfwPlatformFocusWindow = funcs._glfwPlatformFocusWindowFunc;
+    if (_glfwPlatformSetWindowMonitor = funcs._glfwPlatformSetWindowMonitorFunc;
+    if (_glfwPlatformWindowFocused = funcs._glfwPlatformWindowFocusedFunc;
+    if (_glfwPlatformWindowIconified = funcs._glfwPlatformWindowIconifiedFunc;
+    if (_glfwPlatformWindowVisible = funcs._glfwPlatformWindowVisibleFunc;
+    if (_glfwPlatformWindowMaximized = funcs._glfwPlatformWindowMaximizedFunc;
+    if (_glfwPlatformWindowHovered = funcs._glfwPlatformWindowHoveredFunc;
+    if (_glfwPlatformFramebufferTransparent = funcs._glfwPlatformFramebufferTransparentFunc;
+    if (_glfwPlatformGetWindowOpacity = funcs._glfwPlatformGetWindowOpacityFunc;
+    if (_glfwPlatformSetWindowResizable = funcs._glfwPlatformSetWindowResizableFunc;
+    if (_glfwPlatformSetWindowDecorated = funcs._glfwPlatformSetWindowDecoratedFunc;
+    if (_glfwPlatformSetWindowFloating = funcs._glfwPlatformSetWindowFloatingFunc;
+    if (_glfwPlatformSetWindowOpacity = funcs._glfwPlatformSetWindowOpacityFunc;
+
+    if (_glfwPlatformPollEvents = funcs._glfwPlatformPollEventsFunc;
+    if (_glfwPlatformWaitEvents = funcs._glfwPlatformWaitEventsFunc;
+    if (_glfwPlatformWaitEventsTimeout = funcs._glfwPlatformWaitEventsTimeoutFunc;
+    if (_glfwPlatformPostEmptyEvent = funcs._glfwPlatformPostEmptyEventFunc;
+
+    if (_glfwPlatformGetRequiredInstanceExtensions = funcs._glfwPlatformGetRequiredInstanceExtensionsFunc;
+    if (_glfwPlatformGetPhysicalDevicePresentationSupport = funcs._glfwPlatformGetPhysicalDevicePresentationSupportFunc;
+    if (_glfwPlatformCreateWindowSurface = funcs._glfwPlatformCreateWindowSurfaceFunc;
+
+    if (_glfwPlatformCreateTls = funcs._glfwPlatformCreateTlsFunc;
+    if (_glfwPlatformDestroyTls = funcs._glfwPlatformDestroyTlsFunc;
+    if (_glfwPlatformGetTls = funcs._glfwPlatformGetTlsFunc;
+    if (_glfwPlatformSetTls = funcs._glfwPlatformSetTlsFunc;
+
+    if (_glfwPlatformCreateMutex = funcs._glfwPlatformCreateMutexFunc;
+    if (_glfwPlatformDestroyMutex = funcs._glfwPlatformDestroyMutexFunc;
+    if (_glfwPlatformLockMutex = funcs._glfwPlatformLockMutexFunc;
+    if (_glfwPlatformUnlockMutex = funcs._glfwPlatformUnlockMutexFunc;
+    */
+    return GLFW_TRUE;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -235,6 +511,9 @@ GLFWAPI int glfwInit(void)
     if (_glfw.initialized)
         return GLFW_TRUE;
 
+    memset(&_glfw, 0, sizeof(_glfw));
+    _glfw.hints.init = _glfwInitHints;
+
     switch(_glfw.backend)
     {
         #if defined(_GLFW_COCOA)
@@ -263,12 +542,10 @@ GLFWAPI int glfwInit(void)
             break;
         #endif
         default:
-            terminate();
-            return GLFW_FALSE;
+            _glfw.backend = _GLFW_DEFAULT_PLATFORM;
+            _glfwPlatformLoadFunctions(_GLFW_DEFAULT_PLATFORM_FUNCTIONS);
+            break;
     }
-
-    memset(&_glfw, 0, sizeof(_glfw));
-    _glfw.hints.init = _glfwInitHints;
 
     if (!_glfwPlatformInit())
     {

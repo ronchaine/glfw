@@ -51,3 +51,12 @@ typedef struct _GLFWmutexPOSIX
 
 } _GLFWmutexPOSIX;
 
+GLFWbool _glfwPlatformCreateTlsPosix(_GLFWtls* tls);
+void _glfwPlatformDestroyTlsPosix(_GLFWtls* tls);
+void* _glfwPlatformGetTlsPosix(_GLFWtls* tls);
+void _glfwPlatformSetTlsPosix(_GLFWtls* tls, void* value);
+GLFWbool _glfwPlatformCreateMutexPosix(_GLFWmutex* mutex);
+void _glfwPlatformDestroyMutexPosix(_GLFWmutex* mutex);
+void _glfwPlatformLockMutexPosix(_GLFWmutex* mutex);
+void _glfwPlatformUnlockMutexPosix(_GLFWmutex* mutex);
+

@@ -230,7 +230,7 @@ void _glfwSetVideoModeX11(_GLFWmonitor* monitor, const GLFWvidmode* desired)
         int i;
 
         best = _glfwChooseVideoMode(monitor, desired);
-        _glfwPlatformGetVideoMode(monitor, &current);
+        _glfwPlatformGetVideoModeX11(monitor, &current);
         if (_glfwCompareVideoModes(&current, best) == 0)
             return;
 
@@ -485,7 +485,7 @@ GLFWvidmode* _glfwPlatformGetVideoModesX11(_GLFWmonitor* monitor, int* count)
     {
         *count = 1;
         result = calloc(1, sizeof(GLFWvidmode));
-        _glfwPlatformGetVideoMode(monitor, result);
+        _glfwPlatformGetVideoModeX11(monitor, result);
     }
 
     return result;

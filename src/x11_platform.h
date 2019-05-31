@@ -636,5 +636,8 @@ static const struct _GLFWplatformfunctions _glfwFunctionsX11 = {
 
     ._glfwPlatformGetTimerValueFunc = _glfwPlatformGetTimerValuePosix,
     ._glfwPlatformGetTimerFrequencyFunc = _glfwPlatformGetTimerFrequencyPosix,
+    
+    ._glfwPlatformPollJoystickFunc = _glfwPlatformPollJoystickLinux,
+    ._glfwPlatformUpdateGamepadGUIDFunc = _glfwPlatformUpdateGamepadGUIDLinux,
 };
 

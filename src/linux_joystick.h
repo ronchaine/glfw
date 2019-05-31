@@ -62,3 +62,6 @@ GLFWbool _glfwInitJoysticksLinux(void);
 void _glfwTerminateJoysticksLinux(void);
 void _glfwDetectJoystickConnectionLinux(void);
 
+int _glfwPlatformPollJoystickLinux(_GLFWjoystick* js, int mode);
+void _glfwPlatformUpdateGamepadGUIDLinux(char* guid);
+

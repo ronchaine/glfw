@@ -92,7 +92,6 @@ typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR
 #ifndef _GLFW_DEFAULT_PLATFORM_FUNCTIONS
 #define _GLFW_DEFAULT_PLATFORM              GLFW_PLATFORM_WAYLAND
 #define _GLFW_DEFAULT_PLATFORM_FUNCTIONS    _glfwFunctionsWayland
-#warning Using wayland
 #endif
 
 struct wl_cursor_image {
@@ -542,5 +541,7 @@ static const struct _GLFWplatformfunctions _glfwFunctionsWayland = {
 
     ._glfwPlatformGetTimerValueFunc = _glfwPlatformGetTimerValuePosix,
     ._glfwPlatformGetTimerFrequencyFunc = _glfwPlatformGetTimerFrequencyPosix,
+
+    ._glfwPlatformUpdateGamepadGUIDFunc = _glfwPlatformUpdateGamepadGUIDLinux,
 };
 

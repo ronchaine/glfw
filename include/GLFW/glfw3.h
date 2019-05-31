@@ -1047,6 +1047,16 @@ extern "C" {
 #define GLFW_EGL_CONTEXT_API        0x00036002
 #define GLFW_OSMESA_CONTEXT_API     0x00036003
 
+typedef enum _GLFWplatformname
+{
+  GLFW_PLATFORM_COCOA,
+  GLFW_PLATFORM_WIN32,
+  GLFW_PLATFORM_X11,
+  GLFW_PLATFORM_WAYLAND,
+  GLFW_PLATFORM_OSMESA,
+  GLFW_PLATFORM_GBM
+} _GLFWplatformname;
+
 /*! @defgroup shapes Standard cursor shapes
  *  @brief Standard system cursor shapes.
  *

@@ -179,16 +179,6 @@ typedef void (APIENTRY * PFN_vkVoidFunction)(void);
   #define vkGetInstanceProcAddr _glfw.vk.GetInstanceProcAddr
 #endif
 
-typedef enum _GLFWplatformname
-{
-  GLFW_PLATFORM_COCOA,
-  GLFW_PLATFORM_WIN32,
-  GLFW_PLATFORM_X11,
-  GLFW_PLATFORM_WAYLAND,
-  GLFW_PLATFORM_OSMESA,
-  GLFW_PLATFORM_GBM
-} _GLFWplatformname;
-
 #if defined(_GLFW_COCOA)
   #define API_FOUND
   #include "cocoa_platform.h"

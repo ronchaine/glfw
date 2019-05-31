@@ -52,11 +52,12 @@ static _GLFWerror _glfwMainThreadError;
 static GLFWerrorfun _glfwErrorCallback;
 static _GLFWinitconfig _glfwInitHints =
 {
-    GLFW_TRUE,      // hat buttons
+    GLFW_TRUE,              // hat buttons
     {
-        GLFW_TRUE,  // macOS menu bar
-        GLFW_TRUE   // macOS bundle chdir
-    }
+        GLFW_TRUE,          // macOS menu bar
+        GLFW_TRUE           // macOS bundle chdir
+    },
+    GLFW_DONT_CARE          // Use any platform available
 };
 
 // Declare GLFW platform functions in this file
@@ -521,7 +522,26 @@ GLFWAPI int glfwInit(void)
     memset(&_glfw, 0, sizeof(_glfw));
     _glfw.hints.init = _glfwInitHints;
 
-    switch(_glfw.backend)
+    if (_glfw.hints.init.platform == GLFW_DONT_CARE)
+    {
+        #if defined (_GLFW_COCOA)
+            _glfw.platform = GLFW_PLATFORM_COCOA;
+        #elif defined(_GLFW_WIN32)
+            _glfw.platform = GLFW_PLATFORM_WIN32;
+        #elif defined(_GLFW_WAYLAND)
+            _glfw.platform = GLFW_PLATFORM_WAYLAND;
+        #elif defined(_GLFW_X11)
+            _glfw.platform = GLFW_PLATFORM_X11;
+        #elif defined(_GLFW_GBM)
+            _glfw.platform = GLFW_PLATFORM_GBM;
+        #else
+            #error No platforms in build
+        #endif
+    } else {
+        _glfw.platform = _glfw.hints.init.platform;
+    }
+
+    switch(_glfw.platform)
     {
         #if defined(_GLFW_COCOA)
         case GLFW_PLATFORM_COCOA:
@@ -549,9 +569,9 @@ GLFWAPI int glfwInit(void)
             break;
         #endif
         default:
-            _glfw.backend = _GLFW_DEFAULT_PLATFORM;
-            _glfwPlatformLoadFunctions(_GLFW_DEFAULT_PLATFORM_FUNCTIONS);
-            break;
+            _glfwInputError(GLFW_INVALID_ENUM,
+                            "Invalid platform 0x%08X", _glfw.platform);
+            return GLFW_FALSE;
     }
 
     if (!_glfwPlatformInit())
@@ -611,6 +631,9 @@ GLFWAPI void glfwInitHint(int hint, int value)
             return;
         case GLFW_COCOA_MENUBAR:
             _glfwInitHints.ns.menubar = value;
+            return;
+        case GLFW_PLATFORM:
+            _glfwInitHints.platform = value;
             return;
     }
 

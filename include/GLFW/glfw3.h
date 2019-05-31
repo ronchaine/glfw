@@ -1173,6 +1173,11 @@ extern "C" {
  *  macOS specific [init hint](@ref GLFW_COCOA_MENUBAR_hint).
  */
 #define GLFW_COCOA_MENUBAR          0x00051002
+/*! @brief Platform to be used init hint
+ *
+ *  Choose platform for GLFW to use [init hint](@ref GLFW_PLATFORM_hint)
+ */
+#define GLFW_PLATFORM               0x00051003
 /*! @} */
 
 #define GLFW_DONT_CARE              -1

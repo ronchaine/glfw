@@ -123,6 +123,7 @@ static GLFWbool chooseEGLConfig(const _GLFWctxconfig* ctxconfig,
             continue;
 
 #if defined(_GLFW_X11)
+        if (_glfw.backend == GLFW_PLATFORM_X11)
         {
             XVisualInfo vi = {0};
 
@@ -134,6 +135,7 @@ static GLFWbool chooseEGLConfig(const _GLFWctxconfig* ctxconfig,
             if (desired->transparent)
             {
                 int count;
+
                 XVisualInfo* vis =
                     XGetVisualInfo(_glfw.x11.display, VisualIDMask, &vi, &count);
                 if (vis)

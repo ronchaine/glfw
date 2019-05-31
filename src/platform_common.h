@@ -59,9 +59,6 @@ typedef struct _GLFWplatformfunctions
     void (*_glfwPlatformSetClipboardStringFunc)(const char* string);
     const char* (*_glfwPlatformGetClipboardStringFunc)(void);
 
-    int (*_glfwPlatformPollJoystickFunc)(_GLFWjoystick* js, int mode);
-    void (*_glfwPlatformUpdateGamepadGUIDFunc)(char* guid);
-
     int (*_glfwPlatformCreateWindowFunc)(_GLFWwindow* window,
                                          const _GLFWwndconfig* wndconfig,
                                          const _GLFWctxconfig* ctxconfig,
@@ -132,6 +129,9 @@ typedef struct _GLFWplatformfunctions
 
     uint64_t (*_glfwPlatformGetTimerValueFunc)(void);
     uint64_t (*_glfwPlatformGetTimerFrequencyFunc)(void);
+
+    int (*_glfwPlatformPollJoystickFunc)(_GLFWjoystick* js, int mode);
+    void (*_glfwPlatformUpdateGamepadGUIDFunc)(char* guid);
 } _GLFWplatformfunctions;
 
 
@@ -245,3 +245,6 @@ extern GLFWbool (*_glfwPlatformCreateMutex)(_GLFWmutex* mutex);
 extern void (*_glfwPlatformDestroyMutex)(_GLFWmutex* mutex);
 extern void (*_glfwPlatformLockMutex)(_GLFWmutex* mutex);
 extern void (*_glfwPlatformUnlockMutex)(_GLFWmutex* mutex);
+
+extern int (*_glfwPlatformPollJoystick)(_GLFWjoystick* js, int mode);
+extern void (*_glfwPlatformUpdateGamepadGUID)(char* guid);

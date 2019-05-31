@@ -305,6 +305,9 @@ GLFWbool _glfwPlatformLoadFunctions(_GLFWplatformfunctions funcs)
 
     _glfwPlatformGetTimerValue = funcs._glfwPlatformGetTimerValueFunc;
     _glfwPlatformGetTimerFrequency = funcs._glfwPlatformGetTimerFrequencyFunc;
+
+    _glfwPlatformPollJoystick = funcs._glfwPlatformPollJoystickFunc;
+    _glfwPlatformUpdateGamepadGUID = funcs._glfwPlatformUpdateGamepadGUIDFunc;
     /*
     if (_glfwPlatformInit == NULL)
     if (_glfwPlatformTerminate == NULL)

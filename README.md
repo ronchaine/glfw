@@ -118,7 +118,11 @@ information on what to include when reporting a bug.
 
 ## Changelog
 
-User-visible changes since the last release.
+ - Disabled tests and examples by default when built as a CMake subdirectory
+ - Bugfix: The CMake config-file package used an absolute path and was not
+   relocatable (#1470)
+ - [X11] Bugfix: The CMake files did not check for the XInput headers (#1480)
+ - [NSGL] Removed enforcement of forward-compatible flag for core contexts
 
 
 ## Contact
@@ -200,6 +204,7 @@ skills.
  - Lucas Hinderberger
  - Paul Holden
  - Warren Hu
+ - Charles Huber
  - IntellectualKitty
  - Aaron Jacobs
  - Erik S. V. Jansson
@@ -217,6 +222,7 @@ skills.
  - Robin Leffmann
  - Glenn Lewis
  - Shane Liesegang
+ - Anders Lindqvist
  - Eyal Lotem
  - Aaron Loucks
  - Tristam MacDonald
@@ -258,6 +264,7 @@ skills.
  - Cyril Pichard
  - Keith Pitt
  - Stanislav Podgorskiy
+ - Konstantin Podsvirov
  - Nathan Poirier
  - Alexandre Pretyman
  - przemekmirek

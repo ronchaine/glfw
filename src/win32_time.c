@@ -57,7 +57,7 @@ void _glfwInitTimerWin32(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-uint64_t _glfwPlatformGetTimerValue(void)
+uint64_t _glfwPlatformGetTimerValueWin32(void)
 {
     if (_glfw.timer.win32.hasPC)
     {
@@ -69,7 +69,7 @@ uint64_t _glfwPlatformGetTimerValue(void)
         return (uint64_t) timeGetTime();
 }
 
-uint64_t _glfwPlatformGetTimerFrequency(void)
+uint64_t _glfwPlatformGetTimerFrequencyWin32(void)
 {
     return _glfw.timer.win32.frequency;
 }

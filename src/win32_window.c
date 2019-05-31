@@ -1371,10 +1371,10 @@ void _glfwUnregisterWindowClassWin32(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformCreateWindow(_GLFWwindow* window,
-                              const _GLFWwndconfig* wndconfig,
-                              const _GLFWctxconfig* ctxconfig,
-                              const _GLFWfbconfig* fbconfig)
+int _glfwPlatformCreateWindowWin32(_GLFWwindow* window,
+                                   const _GLFWwndconfig* wndconfig,
+                                   const _GLFWctxconfig* ctxconfig,
+                                   const _GLFWfbconfig* fbconfig)
 {
     if (!createNativeWindow(window, wndconfig, fbconfig))
         return GLFW_FALSE;
@@ -1415,7 +1415,7 @@ int _glfwPlatformCreateWindow(_GLFWwindow* window,
     return GLFW_TRUE;
 }
 
-void _glfwPlatformDestroyWindow(_GLFWwindow* window)
+void _glfwPlatformDestroyWindowWin32(_GLFWwindow* window)
 {
     if (window->monitor)
         releaseMonitor(window);
@@ -1450,8 +1450,8 @@ void _glfwPlatformSetWindowTitle(_GLFWwindow* window, const char* title)
     free(wideTitle);
 }
 
-void _glfwPlatformSetWindowIcon(_GLFWwindow* window,
-                                int count, const GLFWimage* images)
+void _glfwPlatformSetWindowIconWin32(_GLFWwindow* window,
+                                     int count, const GLFWimage* images)
 {
     HICON bigIcon = NULL, smallIcon = NULL;
 
@@ -1489,7 +1489,7 @@ void _glfwPlatformSetWindowIcon(_GLFWwindow* window,
     }
 }
 
-void _glfwPlatformGetWindowPos(_GLFWwindow* window, int* xpos, int* ypos)
+void _glfwPlatformGetWindowPosWin32(_GLFWwindow* window, int* xpos, int* ypos)
 {
     POINT pos = { 0, 0 };
     ClientToScreen(window->win32.handle, &pos);
@@ -1500,7 +1500,7 @@ void _glfwPlatformGetWindowPos(_GLFWwindow* window, int* xpos, int* ypos)
         *ypos = pos.y;
 }
 
-void _glfwPlatformSetWindowPos(_GLFWwindow* window, int xpos, int ypos)
+void _glfwPlatformSetWindowPosWin32(_GLFWwindow* window, int xpos, int ypos)
 {
     RECT rect = { xpos, ypos, xpos, ypos };
 
@@ -1520,7 +1520,7 @@ void _glfwPlatformSetWindowPos(_GLFWwindow* window, int xpos, int ypos)
                  SWP_NOACTIVATE | SWP_NOZORDER | SWP_NOSIZE);
 }
 
-void _glfwPlatformGetWindowSize(_GLFWwindow* window, int* width, int* height)
+void _glfwPlatformGetWindowSizeWin32(_GLFWwindow* window, int* width, int* height)
 {
     RECT area;
     GetClientRect(window->win32.handle, &area);
@@ -1531,7 +1531,7 @@ void _glfwPlatformGetWindowSize(_GLFWwindow* window, int* width, int* height)
         *height = area.bottom;
 }
 
-void _glfwPlatformSetWindowSize(_GLFWwindow* window, int width, int height)
+void _glfwPlatformSetWindowSizeWin32(_GLFWwindow* window, int width, int height)
 {
     if (window->monitor)
     {
@@ -1563,9 +1563,9 @@ void _glfwPlatformSetWindowSize(_GLFWwindow* window, int width, int height)
     }
 }
 
-void _glfwPlatformSetWindowSizeLimits(_GLFWwindow* window,
-                                      int minwidth, int minheight,
-                                      int maxwidth, int maxheight)
+void _glfwPlatformSetWindowSizeLimitsWin32(_GLFWwindow* window,
+                                           int minwidth, int minheight,
+                                           int maxwidth, int maxheight)
 {
     RECT area;
 
@@ -1582,7 +1582,7 @@ void _glfwPlatformSetWindowSizeLimits(_GLFWwindow* window,
                area.bottom - area.top, TRUE);
 }
 
-void _glfwPlatformSetWindowAspectRatio(_GLFWwindow* window, int numer, int denom)
+void _glfwPlatformSetWindowAspectRatioWin32(_GLFWwindow* window, int numer, int denom)
 {
     RECT area;
 
@@ -1597,19 +1597,19 @@ void _glfwPlatformSetWindowAspectRatio(_GLFWwindow* window, int numer, int denom
                area.bottom - area.top, TRUE);
 }
 
-void _glfwPlatformGetFramebufferSize(_GLFWwindow* window, int* width, int* height)
+void _glfwPlatformGetFramebufferSizeWin32(_GLFWwindow* window, int* width, int* height)
 {
-    _glfwPlatformGetWindowSize(window, width, height);
+    _glfwPlatformGetWindowSizeWin32(window, width, height);
 }
 
-void _glfwPlatformGetWindowFrameSize(_GLFWwindow* window,
-                                     int* left, int* top,
-                                     int* right, int* bottom)
+void _glfwPlatformGetWindowFrameSizeWin32(_GLFWwindow* window,
+                                          int* left, int* top,
+                                          int* right, int* bottom)
 {
     RECT rect;
     int width, height;
 
-    _glfwPlatformGetWindowSize(window, &width, &height);
+    _glfwPlatformGetWindowSizeWin32(window, &width, &height);
     SetRect(&rect, 0, 0, width, height);
 
     if (_glfwIsWindows10AnniversaryUpdateOrGreaterWin32())
@@ -1634,56 +1634,56 @@ void _glfwPlatformGetWindowFrameSize(_GLFWwindow* window,
         *bottom = rect.bottom - height;
 }
 
-void _glfwPlatformGetWindowContentScale(_GLFWwindow* window,
-                                        float* xscale, float* yscale)
+void _glfwPlatformGetWindowContentScaleWin32(_GLFWwindow* window,
+                                             float* xscale, float* yscale)
 {
     const HANDLE handle = MonitorFromWindow(window->win32.handle,
                                             MONITOR_DEFAULTTONEAREST);
     _glfwGetMonitorContentScaleWin32(handle, xscale, yscale);
 }
 
-void _glfwPlatformIconifyWindow(_GLFWwindow* window)
+void _glfwPlatformIconifyWindowWin32(_GLFWwindow* window)
 {
     ShowWindow(window->win32.handle, SW_MINIMIZE);
 }
 
-void _glfwPlatformRestoreWindow(_GLFWwindow* window)
+void _glfwPlatformRestoreWindowWin32(_GLFWwindow* window)
 {
     ShowWindow(window->win32.handle, SW_RESTORE);
 }
 
-void _glfwPlatformMaximizeWindow(_GLFWwindow* window)
+void _glfwPlatformMaximizeWindowWin32(_GLFWwindow* window)
 {
     ShowWindow(window->win32.handle, SW_MAXIMIZE);
 }
 
-void _glfwPlatformShowWindow(_GLFWwindow* window)
+void _glfwPlatformShowWindowWin32(_GLFWwindow* window)
 {
     ShowWindow(window->win32.handle, SW_SHOWNA);
 }
 
-void _glfwPlatformHideWindow(_GLFWwindow* window)
+void _glfwPlatformHideWindowWin32(_GLFWwindow* window)
 {
     ShowWindow(window->win32.handle, SW_HIDE);
 }
 
-void _glfwPlatformRequestWindowAttention(_GLFWwindow* window)
+void _glfwPlatformRequestWindowAttentionWin32(_GLFWwindow* window)
 {
     FlashWindow(window->win32.handle, TRUE);
 }
 
-void _glfwPlatformFocusWindow(_GLFWwindow* window)
+void _glfwPlatformFocusWindowWin32(_GLFWwindow* window)
 {
     BringWindowToTop(window->win32.handle);
     SetForegroundWindow(window->win32.handle);
     SetFocus(window->win32.handle);
 }
 
-void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
-                                   _GLFWmonitor* monitor,
-                                   int xpos, int ypos,
-                                   int width, int height,
-                                   int refreshRate)
+void _glfwPlatformSetWindowMonitorWin32(_GLFWwindow* window,
+                                        _GLFWmonitor* monitor,
+                                        int xpos, int ypos,
+                                        int width, int height,
+                                        int refreshRate)
 {
     if (window->monitor == monitor)
     {
@@ -1789,32 +1789,32 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
     }
 }
 
-int _glfwPlatformWindowFocused(_GLFWwindow* window)
+int _glfwPlatformWindowFocusedWin32(_GLFWwindow* window)
 {
     return window->win32.handle == GetActiveWindow();
 }
 
-int _glfwPlatformWindowIconified(_GLFWwindow* window)
+int _glfwPlatformWindowIconifiedWin32(_GLFWwindow* window)
 {
     return IsIconic(window->win32.handle);
 }
 
-int _glfwPlatformWindowVisible(_GLFWwindow* window)
+int _glfwPlatformWindowVisibleWin32(_GLFWwindow* window)
 {
     return IsWindowVisible(window->win32.handle);
 }
 
-int _glfwPlatformWindowMaximized(_GLFWwindow* window)
+int _glfwPlatformWindowMaximizedWin32(_GLFWwindow* window)
 {
     return IsZoomed(window->win32.handle);
 }
 
-int _glfwPlatformWindowHovered(_GLFWwindow* window)
+int _glfwPlatformWindowHoveredWin32(_GLFWwindow* window)
 {
     return cursorInContentArea(window);
 }
 
-int _glfwPlatformFramebufferTransparent(_GLFWwindow* window)
+int _glfwPlatformFramebufferTransparentWin32(_GLFWwindow* window)
 {
     BOOL enabled;
 
@@ -1827,24 +1827,24 @@ int _glfwPlatformFramebufferTransparent(_GLFWwindow* window)
     return SUCCEEDED(DwmIsCompositionEnabled(&enabled)) && enabled;
 }
 
-void _glfwPlatformSetWindowResizable(_GLFWwindow* window, GLFWbool enabled)
+void _glfwPlatformSetWindowResizableWin32(_GLFWwindow* window, GLFWbool enabled)
 {
     updateWindowStyles(window);
 }
 
-void _glfwPlatformSetWindowDecorated(_GLFWwindow* window, GLFWbool enabled)
+void _glfwPlatformSetWindowDecoratedWin32(_GLFWwindow* window, GLFWbool enabled)
 {
     updateWindowStyles(window);
 }
 
-void _glfwPlatformSetWindowFloating(_GLFWwindow* window, GLFWbool enabled)
+void _glfwPlatformSetWindowFloatingWin32(_GLFWwindow* window, GLFWbool enabled)
 {
     const HWND after = enabled ? HWND_TOPMOST : HWND_NOTOPMOST;
     SetWindowPos(window->win32.handle, after, 0, 0, 0, 0,
                  SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
 }
 
-float _glfwPlatformGetWindowOpacity(_GLFWwindow* window)
+float _glfwPlatformGetWindowOpacityWin32(_GLFWwindow* window)
 {
     BYTE alpha;
     DWORD flags;
@@ -1859,7 +1859,7 @@ float _glfwPlatformGetWindowOpacity(_GLFWwindow* window)
     return 1.f;
 }
 
-void _glfwPlatformSetWindowOpacity(_GLFWwindow* window, float opacity)
+void _glfwPlatformSetWindowOpacityWin32(_GLFWwindow* window, float opacity)
 {
     if (opacity < 1.f)
     {
@@ -1877,7 +1877,7 @@ void _glfwPlatformSetWindowOpacity(_GLFWwindow* window, float opacity)
     }
 }
 
-void _glfwPlatformSetRawMouseMotion(_GLFWwindow *window, GLFWbool enabled)
+void _glfwPlatformSetRawMouseMotionWin32(_GLFWwindow *window, GLFWbool enabled)
 {
     if (_glfw.win32.disabledCursorWindow != window)
         return;
@@ -1888,12 +1888,12 @@ void _glfwPlatformSetRawMouseMotion(_GLFWwindow *window, GLFWbool enabled)
         disableRawMouseMotion(window);
 }
 
-GLFWbool _glfwPlatformRawMouseMotionSupported(void)
+GLFWbool _glfwPlatformRawMouseMotionSupportedWin32(void)
 {
     return GLFW_TRUE;
 }
 
-void _glfwPlatformPollEvents(void)
+void _glfwPlatformPollEventsWin32(void)
 {
     MSG msg;
     HWND handle;
@@ -1965,26 +1965,26 @@ void _glfwPlatformPollEvents(void)
     }
 }
 
-void _glfwPlatformWaitEvents(void)
+void _glfwPlatformWaitEventsWin32(void)
 {
     WaitMessage();
 
-    _glfwPlatformPollEvents();
+    _glfwPlatformPollEventsWin32();
 }
 
-void _glfwPlatformWaitEventsTimeout(double timeout)
+void _glfwPlatformWaitEventsTimeoutWin32(double timeout)
 {
     MsgWaitForMultipleObjects(0, NULL, FALSE, (DWORD) (timeout * 1e3), QS_ALLEVENTS);
 
-    _glfwPlatformPollEvents();
+    _glfwPlatformPollEventsWin32();
 }
 
-void _glfwPlatformPostEmptyEvent(void)
+void _glfwPlatformPostEmptyEventWin32(void)
 {
     PostMessage(_glfw.win32.helperWindowHandle, WM_NULL, 0, 0);
 }
 
-void _glfwPlatformGetCursorPos(_GLFWwindow* window, double* xpos, double* ypos)
+void _glfwPlatformGetCursorPosWin32(_GLFWwindow* window, double* xpos, double* ypos)
 {
     POINT pos;
 
@@ -1999,7 +1999,7 @@ void _glfwPlatformGetCursorPos(_GLFWwindow* window, double* xpos, double* ypos)
     }
 }
 
-void _glfwPlatformSetCursorPos(_GLFWwindow* window, double xpos, double ypos)
+void _glfwPlatformSetCursorPosWin32(_GLFWwindow* window, double xpos, double ypos)
 {
     POINT pos = { (int) xpos, (int) ypos };
 
@@ -2011,11 +2011,11 @@ void _glfwPlatformSetCursorPos(_GLFWwindow* window, double xpos, double ypos)
     SetCursorPos(pos.x, pos.y);
 }
 
-void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
+void _glfwPlatformSetCursorModeWin32(_GLFWwindow* window, int mode)
 {
     if (mode == GLFW_CURSOR_DISABLED)
     {
-        if (_glfwPlatformWindowFocused(window))
+        if (_glfwPlatformWindowFocusedWin32(window))
             disableCursor(window);
     }
     else if (_glfw.win32.disabledCursorWindow == window)
@@ -2024,19 +2024,19 @@ void _glfwPlatformSetCursorMode(_GLFWwindow* window, int mode)
         updateCursorImage(window);
 }
 
-const char* _glfwPlatformGetScancodeName(int scancode)
+const char* _glfwPlatformGetScancodeNameWin32(int scancode)
 {
     return _glfw.win32.keynames[_glfw.win32.keycodes[scancode]];
 }
 
-int _glfwPlatformGetKeyScancode(int key)
+int _glfwPlatformGetKeyScancodeWin32(int key)
 {
     return _glfw.win32.scancodes[key];
 }
 
-int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
-                              const GLFWimage* image,
-                              int xhot, int yhot)
+int _glfwPlatformCreateCursorWin32(_GLFWcursor* cursor,
+                                   const GLFWimage* image,
+                                   int xhot, int yhot)
 {
     cursor->win32.handle = (HCURSOR) createIcon(image, xhot, yhot, GLFW_FALSE);
     if (!cursor->win32.handle)
@@ -2045,7 +2045,7 @@ int _glfwPlatformCreateCursor(_GLFWcursor* cursor,
     return GLFW_TRUE;
 }
 
-int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
+int _glfwPlatformCreateStandardCursorWin32(_GLFWcursor* cursor, int shape)
 {
     int id = 0;
 
@@ -2077,19 +2077,19 @@ int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
     return GLFW_TRUE;
 }
 
-void _glfwPlatformDestroyCursor(_GLFWcursor* cursor)
+void _glfwPlatformDestroyCursorWin32(_GLFWcursor* cursor)
 {
     if (cursor->win32.handle)
         DestroyIcon((HICON) cursor->win32.handle);
 }
 
-void _glfwPlatformSetCursor(_GLFWwindow* window, _GLFWcursor* cursor)
+void _glfwPlatformSetCursorWin32(_GLFWwindow* window, _GLFWcursor* cursor)
 {
     if (cursorInContentArea(window))
         updateCursorImage(window);
 }
 
-void _glfwPlatformSetClipboardString(const char* string)
+void _glfwPlatformSetClipboardStringWin32(const char* string)
 {
     int characterCount;
     HANDLE object;
@@ -2132,7 +2132,7 @@ void _glfwPlatformSetClipboardString(const char* string)
     CloseClipboard();
 }
 
-const char* _glfwPlatformGetClipboardString(void)
+const char* _glfwPlatformGetClipboardStringWin32(void)
 {
     HANDLE object;
     WCHAR* buffer;
@@ -2171,7 +2171,7 @@ const char* _glfwPlatformGetClipboardString(void)
     return _glfw.win32.clipboardString;
 }
 
-void _glfwPlatformGetRequiredInstanceExtensions(char** extensions)
+void _glfwPlatformGetRequiredInstanceExtensionsWin32(char** extensions)
 {
     if (!_glfw.vk.KHR_surface || !_glfw.vk.KHR_win32_surface)
         return;
@@ -2180,9 +2180,9 @@ void _glfwPlatformGetRequiredInstanceExtensions(char** extensions)
     extensions[1] = "VK_KHR_win32_surface";
 }
 
-int _glfwPlatformGetPhysicalDevicePresentationSupport(VkInstance instance,
-                                                      VkPhysicalDevice device,
-                                                      uint32_t queuefamily)
+int _glfwPlatformGetPhysicalDevicePresentationSupportWin32(VkInstance instance,
+                                                           VkPhysicalDevice device,
+                                                           uint32_t queuefamily)
 {
     PFN_vkGetPhysicalDeviceWin32PresentationSupportKHR
         vkGetPhysicalDeviceWin32PresentationSupportKHR =
@@ -2198,10 +2198,10 @@ int _glfwPlatformGetPhysicalDevicePresentationSupport(VkInstance instance,
     return vkGetPhysicalDeviceWin32PresentationSupportKHR(device, queuefamily);
 }
 
-VkResult _glfwPlatformCreateWindowSurface(VkInstance instance,
-                                          _GLFWwindow* window,
-                                          const VkAllocationCallbacks* allocator,
-                                          VkSurfaceKHR* surface)
+VkResult _glfwPlatformCreateWindowSurfaceWin32(VkInstance instance,
+                                               _GLFWwindow* window,
+                                               const VkAllocationCallbacks* allocator,
+                                               VkSurfaceKHR* surface)
 {
     VkResult err;
     VkWin32SurfaceCreateInfoKHR sci;

@@ -458,3 +458,179 @@ void _glfwSetVideoModeWin32(_GLFWmonitor* monitor, const GLFWvidmode* desired);
 void _glfwRestoreVideoModeWin32(_GLFWmonitor* monitor);
 void _glfwGetMonitorContentScaleWin32(HMONITOR handle, float* xscale, float* yscale);
 
+//////////////////////////////////////////////////////////////////////////
+//////                       GLFW platform API                      //////
+//////////////////////////////////////////////////////////////////////////
+
+// init
+int  _glfwPlatformInitWin32(void);
+void _glfwPlatformTerminateWin32(void);
+const char* _glfwPlatformGetVersionStringWin32(void);
+
+// monitor
+void _glfwPlatformFreeMonitorWin32(_GLFWmonitor* monitor);
+void _glfwPlatformGetMonitorPosWin32(_GLFWmonitor* monitor, int* xpos, int* ypos);
+void _glfwPlatformGetMonitorContentScaleWin32(_GLFWmonitor* monitor,
+                                            float* xscale, float* yscale);
+void _glfwPlatformGetMonitorWorkareaWin32(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height);
+GLFWvidmode* _glfwPlatformGetVideoModesWin32(_GLFWmonitor* monitor, int* count);
+void _glfwPlatformGetVideoModeWin32(_GLFWmonitor* monitor, GLFWvidmode* mode);
+GLFWbool _glfwPlatformGetGammaRampWin32(_GLFWmonitor* monitor, GLFWgammaramp* ramp);
+void _glfwPlatformSetGammaRampWin32(_GLFWmonitor* monitor, const GLFWgammaramp* ramp);
+
+// window
+int _glfwPlatformCreateWindowWin32(_GLFWwindow* window,
+                                     const _GLFWwndconfig* wndconfig,
+                                     const _GLFWctxconfig* ctxconfig,
+                                     const _GLFWfbconfig* fbconfig);
+void _glfwPlatformDestroyWindowWin32(_GLFWwindow* window);
+void _glfwPlatformSetWindowTitleWin32(_GLFWwindow* window, const char* title);
+void _glfwPlatformSetWindowIconWin32(_GLFWwindow* window, int count, const GLFWimage* images);
+void _glfwPlatformGetWindowPosWin32(_GLFWwindow* window, int* xpos, int* ypos);
+void _glfwPlatformSetWindowPosWin32(_GLFWwindow* window, int xpos, int ypos);
+void _glfwPlatformGetWindowSizeWin32(_GLFWwindow* window, int* width, int* height);
+void _glfwPlatformSetWindowSizeWin32(_GLFWwindow* window, int width, int height);
+void _glfwPlatformSetWindowSizeLimitsWin32(_GLFWwindow* window,
+                                             int minwidth, int minheight,
+                                             int maxwidth, int maxheight);
+void _glfwPlatformSetWindowAspectRatioWin32(_GLFWwindow* window, int numer, int denom);
+void _glfwPlatformGetFramebufferSizeWin32(_GLFWwindow* window, int* width, int* height);
+void _glfwPlatformGetWindowFrameSizeWin32(_GLFWwindow* window,
+                                            int* left, int* top,
+                                            int* right, int* bottom);
+void _glfwPlatformGetWindowContentScaleWin32(_GLFWwindow* window, float* xscale, float* yscale);
+void _glfwPlatformIconifyWindowWin32(_GLFWwindow* window);
+void _glfwPlatformRestoreWindowWin32(_GLFWwindow* window);
+void _glfwPlatformMaximizeWindowWin32(_GLFWwindow* window);
+void _glfwPlatformShowWindowWin32(_GLFWwindow* window);
+void _glfwPlatformHideWindowWin32(_GLFWwindow* window);
+void _glfwPlatformRequestWindowAttentionWin32(_GLFWwindow* window);
+void _glfwPlatformFocusWindowWin32(_GLFWwindow* window);
+void _glfwPlatformSetWindowMonitorWin32(_GLFWwindow* window,
+                                          _GLFWmonitor* monitor,
+                                          int xpos, int ypos,
+                                          int width, int height,
+                                          int refreshRate);
+int _glfwPlatformCreateCursorWin32(_GLFWcursor* cursor,
+                                     const GLFWimage* image,
+                                     int xhot, int yhot);
+int _glfwPlatformWindowFocusedWin32(_GLFWwindow* window);
+int _glfwPlatformWindowIconifiedWin32(_GLFWwindow* window);
+int _glfwPlatformWindowVisibleWin32(_GLFWwindow* window);
+int _glfwPlatformWindowMaximizedWin32(_GLFWwindow* window);
+int _glfwPlatformWindowHoveredWin32(_GLFWwindow* window);
+int _glfwPlatformFramebufferTransparentWin32(_GLFWwindow* window);
+void _glfwPlatformSetWindowResizableWin32(_GLFWwindow* window, GLFWbool enabled);
+void _glfwPlatformSetWindowDecoratedWin32(_GLFWwindow* window, GLFWbool enabled);
+void _glfwPlatformSetWindowFloatingWin32(_GLFWwindow* window, GLFWbool enabled);
+float _glfwPlatformGetWindowOpacityWin32(_GLFWwindow* window);
+void _glfwPlatformSetWindowOpacityWin32(_GLFWwindow* window, float opacity);
+void _glfwPlatformSetRawMouseMotionWin32(_GLFWwindow *window, GLFWbool enabled);
+GLFWbool _glfwPlatformRawMouseMotionSupportedWin32(void);
+void _glfwPlatformPollEventsWin32(void);
+void _glfwPlatformWaitEventsWin32(void);
+void _glfwPlatformWaitEventsTimeoutWin32(double timeout);
+void _glfwPlatformPostEmptyEventWin32(void);
+void _glfwPlatformGetCursorPosWin32(_GLFWwindow* window, double* xpos, double* ypos);
+void _glfwPlatformSetCursorPosWin32(_GLFWwindow* window, double x, double y);
+void _glfwPlatformSetCursorModeWin32(_GLFWwindow* window, int mode);
+const char* _glfwPlatformGetScancodeNameWin32(int scancode);
+int _glfwPlatformGetKeyScancodeWin32(int key);
+int _glfwPlatformCreateStandardCursorWin32(_GLFWcursor* cursor, int shape);
+void _glfwPlatformDestroyCursorWin32(_GLFWcursor* cursor);
+void _glfwPlatformSetCursorWin32(_GLFWwindow* window, _GLFWcursor* cursor);
+void _glfwPlatformSetClipboardStringWin32(const char* string);
+const char* _glfwPlatformGetClipboardStringWin32(void);
+void _glfwPlatformGetRequiredInstanceExtensionsWin32(char** extensions);
+int _glfwPlatformGetPhysicalDevicePresentationSupportWin32(VkInstance instance,
+                                                             VkPhysicalDevice device,
+                                                             uint32_t queuefamily);
+VkResult _glfwPlatformCreateWindowSurfaceWin32(VkInstance instance,
+                                                 _GLFWwindow* window,
+                                                 const VkAllocationCallbacks* allocator,
+                                                 VkSurfaceKHR* surface);
+
+static const struct _GLFWplatformfunctions _glfwFunctionsWin32 = {
+    ._glfwPlatformInitFunc = _glfwPlatformInitWin32,
+    ._glfwPlatformTerminateFunc = _glfwPlatformTerminateWin32,
+    ._glfwPlatformGetVersionStringFunc = _glfwPlatformGetVersionStringWin32,
+
+    ._glfwPlatformFreeMonitorFunc = _glfwPlatformFreeMonitorWin32,
+    ._glfwPlatformGetMonitorPosFunc = _glfwPlatformGetMonitorPosWin32,
+    ._glfwPlatformGetMonitorContentScaleFunc = _glfwPlatformGetMonitorContentScaleWin32,
+    ._glfwPlatformGetMonitorWorkareaFunc = _glfwPlatformGetMonitorWorkareaWin32,
+    ._glfwPlatformGetVideoModesFunc = _glfwPlatformGetVideoModesWin32,
+    ._glfwPlatformGetVideoModeFunc = _glfwPlatformGetVideoModeWin32,
+    ._glfwPlatformGetGammaRampFunc = _glfwPlatformGetGammaRampWin32,
+    ._glfwPlatformSetGammaRampFunc = _glfwPlatformSetGammaRampWin32,
+
+    ._glfwPlatformCreateWindowFunc = _glfwPlatformCreateWindowWin32,
+    ._glfwPlatformDestroyWindowFunc = _glfwPlatformDestroyWindowWin32,
+    ._glfwPlatformSetWindowTitleFunc = _glfwPlatformSetWindowTitleWin32,
+    ._glfwPlatformSetWindowIconFunc = _glfwPlatformSetWindowIconWin32,
+    ._glfwPlatformGetWindowPosFunc = _glfwPlatformGetWindowPosWin32,
+    ._glfwPlatformSetWindowPosFunc = _glfwPlatformSetWindowPosWin32,
+    ._glfwPlatformGetWindowSizeFunc = _glfwPlatformGetWindowSizeWin32,
+    ._glfwPlatformSetWindowSizeFunc = _glfwPlatformSetWindowSizeWin32,
+    ._glfwPlatformSetWindowSizeLimitsFunc = _glfwPlatformSetWindowSizeLimitsWin32,
+    ._glfwPlatformSetWindowAspectRatioFunc = _glfwPlatformSetWindowAspectRatioWin32,
+    ._glfwPlatformGetFramebufferSizeFunc = _glfwPlatformGetFramebufferSizeWin32,
+    ._glfwPlatformGetWindowFrameSizeFunc = _glfwPlatformGetWindowFrameSizeWin32,
+    ._glfwPlatformGetWindowContentScaleFunc = _glfwPlatformGetWindowContentScaleWin32,
+    ._glfwPlatformIconifyWindowFunc = _glfwPlatformIconifyWindowWin32,
+    ._glfwPlatformRestoreWindowFunc = _glfwPlatformRestoreWindowWin32,
+    ._glfwPlatformMaximizeWindowFunc = _glfwPlatformMaximizeWindowWin32,
+    ._glfwPlatformShowWindowFunc = _glfwPlatformShowWindowWin32,
+    ._glfwPlatformHideWindowFunc = _glfwPlatformHideWindowWin32,
+    ._glfwPlatformRequestWindowAttentionFunc = _glfwPlatformRequestWindowAttentionWin32,
+    ._glfwPlatformFocusWindowFunc = _glfwPlatformFocusWindowWin32,
+    ._glfwPlatformSetWindowMonitorFunc = _glfwPlatformSetWindowMonitorWin32,
+    ._glfwPlatformCreateCursorFunc = _glfwPlatformCreateCursorWin32,
+    ._glfwPlatformWindowFocusedFunc = _glfwPlatformWindowFocusedWin32,
+    ._glfwPlatformWindowIconifiedFunc = _glfwPlatformWindowIconifiedWin32,
+    ._glfwPlatformWindowVisibleFunc =  _glfwPlatformWindowVisibleWin32,
+    ._glfwPlatformWindowMaximizedFunc = _glfwPlatformWindowMaximizedWin32,
+    ._glfwPlatformWindowHoveredFunc = _glfwPlatformWindowHoveredWin32,
+    ._glfwPlatformFramebufferTransparentFunc = _glfwPlatformFramebufferTransparentWin32,
+    ._glfwPlatformSetWindowResizableFunc = _glfwPlatformSetWindowResizableWin32,
+    ._glfwPlatformSetWindowDecoratedFunc = _glfwPlatformSetWindowDecoratedWin32,
+    ._glfwPlatformSetWindowFloatingFunc = _glfwPlatformSetWindowFloatingWin32,
+    ._glfwPlatformGetWindowOpacityFunc = _glfwPlatformGetWindowOpacityWin32,
+    ._glfwPlatformSetWindowOpacityFunc = _glfwPlatformSetWindowOpacityWin32,
+    ._glfwPlatformSetRawMouseMotionFunc = _glfwPlatformSetRawMouseMotionWin32,
+    ._glfwPlatformRawMouseMotionSupportedFunc = _glfwPlatformRawMouseMotionSupportedWin32,
+    ._glfwPlatformPollEventsFunc = _glfwPlatformPollEventsWin32,
+    ._glfwPlatformWaitEventsFunc = _glfwPlatformWaitEventsWin32,
+    ._glfwPlatformWaitEventsTimeoutFunc = _glfwPlatformWaitEventsTimeoutWin32,
+    ._glfwPlatformPostEmptyEventFunc = _glfwPlatformPostEmptyEventWin32,
+    ._glfwPlatformGetCursorPosFunc = _glfwPlatformGetCursorPosWin32,
+    ._glfwPlatformSetCursorPosFunc = _glfwPlatformSetCursorPosWin32,
+    ._glfwPlatformSetCursorModeFunc = _glfwPlatformSetCursorModeWin32,
+    ._glfwPlatformGetScancodeNameFunc = _glfwPlatformGetScancodeNameWin32,
+    ._glfwPlatformGetKeyScancodeFunc = _glfwPlatformGetKeyScancodeWin32,
+    ._glfwPlatformCreateStandardCursorFunc = _glfwPlatformCreateStandardCursorWin32,
+    ._glfwPlatformDestroyCursorFunc = _glfwPlatformDestroyCursorWin32,
+    ._glfwPlatformSetCursorFunc = _glfwPlatformSetCursorWin32,
+    ._glfwPlatformSetClipboardStringFunc = _glfwPlatformSetClipboardStringWin32,
+    ._glfwPlatformGetClipboardStringFunc = _glfwPlatformGetClipboardStringWin32,
+    ._glfwPlatformGetRequiredInstanceExtensionsFunc = _glfwPlatformGetRequiredInstanceExtensionsWin32,
+    ._glfwPlatformGetPhysicalDevicePresentationSupportFunc = _glfwPlatformGetPhysicalDevicePresentationSupportWin32,
+    ._glfwPlatformCreateWindowSurfaceFunc = _glfwPlatformCreateWindowSurfaceWin32,
+
+    ._glfwPlatformCreateTlsFunc = _glfwPlatformCreateTlsWin32,
+    ._glfwPlatformDestroyTlsFunc = _glfwPlatformDestroyTlsWin32,
+    ._glfwPlatformGetTlsFunc = _glfwPlatformGetTlsWin32,
+    ._glfwPlatformSetTlsFunc = _glfwPlatformSetTlsWin32,
+
+    ._glfwPlatformCreateMutexFunc = _glfwPlatformCreateMutexWin32,
+    ._glfwPlatformDestroyMutexFunc = _glfwPlatformDestroyMutexWin32,
+    ._glfwPlatformLockMutexFunc = _glfwPlatformLockMutexWin32,
+    ._glfwPlatformUnlockMutexFunc = _glfwPlatformUnlockMutexWin32,
+
+    ._glfwPlatformGetTimerValueFunc = _glfwPlatformGetTimerValueWin32,
+    ._glfwPlatformGetTimerFrequencyFunc = _glfwPlatformGetTimerFrequencyWin32,
+    
+    ._glfwPlatformPollJoystickFunc = _glfwPlatformPollJoystickWin32,
+    ._glfwPlatformUpdateGamepadGUIDFunc = _glfwPlatformUpdateGamepadGUIDWin32,
+};
+

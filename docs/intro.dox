@@ -101,15 +101,18 @@ __GLFW_COCOA_MENUBAR__ specifies whether to create a basic menu bar, either from
 a nib or manually, when the first window is created, which is when AppKit is
 initialized.  Set this with @ref glfwInitHint.
 
+@anchor GLFW_PLATFORM_hint
+__GLFW_PLATFORM__ specifies which platform GLFW will use internally.  By default
+GLFW uses whatever it finds first.  Set this with @ref glfwInitHint.
 
 @subsubsection init_hints_values Supported and default values
 
-Initialization hint             | Default value | Supported values
-------------------------------- | ------------- | ----------------
-@ref GLFW_JOYSTICK_HAT_BUTTONS  | `GLFW_TRUE`   | `GLFW_TRUE` or `GLFW_FALSE`
-@ref GLFW_COCOA_CHDIR_RESOURCES | `GLFW_TRUE`   | `GLFW_TRUE` or `GLFW_FALSE`
-@ref GLFW_COCOA_MENUBAR         | `GLFW_TRUE`   | `GLFW_TRUE` or `GLFW_FALSE`
-
+Initialization hint             | Default value   | Supported values
+------------------------------- | --------------- | ----------------
+@ref GLFW_JOYSTICK_HAT_BUTTONS  | `GLFW_TRUE`     | `GLFW_TRUE` or `GLFW_FALSE`
+@ref GLFW_COCOA_CHDIR_RESOURCES | `GLFW_TRUE`     | `GLFW_TRUE` or `GLFW_FALSE`
+@ref GLFW_COCOA_MENUBAR         | `GLFW_TRUE`     | `GLFW_TRUE` or `GLFW_FALSE`
+@ref GLFW_PLATFORM              | `GLFW_DONT_CARE | `GLFW_PLATFORM_COCOA` `GLFW_PLATFORM_WIN32` `GLFW_PLATFORM_X11` `GLFW_PLATFORM_WAYLAND` `GLFW_PLATFORM_OSMESA`
 
 @subsection intro_init_terminate Terminating GLFW
 

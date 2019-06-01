@@ -481,9 +481,9 @@ void _glfwPlatformSetGammaRampWin32(_GLFWmonitor* monitor, const GLFWgammaramp* 
 
 // window
 int _glfwPlatformCreateWindowWin32(_GLFWwindow* window,
-                                     const _GLFWwndconfig* wndconfig,
-                                     const _GLFWctxconfig* ctxconfig,
-                                     const _GLFWfbconfig* fbconfig);
+                                   const _GLFWwndconfig* wndconfig,
+                                   const _GLFWctxconfig* ctxconfig,
+                                   const _GLFWfbconfig* fbconfig);
 void _glfwPlatformDestroyWindowWin32(_GLFWwindow* window);
 void _glfwPlatformSetWindowTitleWin32(_GLFWwindow* window, const char* title);
 void _glfwPlatformSetWindowIconWin32(_GLFWwindow* window, int count, const GLFWimage* images);
@@ -492,13 +492,13 @@ void _glfwPlatformSetWindowPosWin32(_GLFWwindow* window, int xpos, int ypos);
 void _glfwPlatformGetWindowSizeWin32(_GLFWwindow* window, int* width, int* height);
 void _glfwPlatformSetWindowSizeWin32(_GLFWwindow* window, int width, int height);
 void _glfwPlatformSetWindowSizeLimitsWin32(_GLFWwindow* window,
-                                             int minwidth, int minheight,
-                                             int maxwidth, int maxheight);
+                                           int minwidth, int minheight,
+                                           int maxwidth, int maxheight);
 void _glfwPlatformSetWindowAspectRatioWin32(_GLFWwindow* window, int numer, int denom);
 void _glfwPlatformGetFramebufferSizeWin32(_GLFWwindow* window, int* width, int* height);
 void _glfwPlatformGetWindowFrameSizeWin32(_GLFWwindow* window,
-                                            int* left, int* top,
-                                            int* right, int* bottom);
+                                          int* left, int* top,
+                                          int* right, int* bottom);
 void _glfwPlatformGetWindowContentScaleWin32(_GLFWwindow* window, float* xscale, float* yscale);
 void _glfwPlatformIconifyWindowWin32(_GLFWwindow* window);
 void _glfwPlatformRestoreWindowWin32(_GLFWwindow* window);
@@ -508,13 +508,13 @@ void _glfwPlatformHideWindowWin32(_GLFWwindow* window);
 void _glfwPlatformRequestWindowAttentionWin32(_GLFWwindow* window);
 void _glfwPlatformFocusWindowWin32(_GLFWwindow* window);
 void _glfwPlatformSetWindowMonitorWin32(_GLFWwindow* window,
-                                          _GLFWmonitor* monitor,
-                                          int xpos, int ypos,
-                                          int width, int height,
-                                          int refreshRate);
+                                        _GLFWmonitor* monitor,
+                                        int xpos, int ypos,
+                                        int width, int height,
+                                        int refreshRate);
 int _glfwPlatformCreateCursorWin32(_GLFWcursor* cursor,
-                                     const GLFWimage* image,
-                                     int xhot, int yhot);
+                                   const GLFWimage* image,
+                                   int xhot, int yhot);
 int _glfwPlatformWindowFocusedWin32(_GLFWwindow* window);
 int _glfwPlatformWindowIconifiedWin32(_GLFWwindow* window);
 int _glfwPlatformWindowVisibleWin32(_GLFWwindow* window);
@@ -544,12 +544,12 @@ void _glfwPlatformSetClipboardStringWin32(const char* string);
 const char* _glfwPlatformGetClipboardStringWin32(void);
 void _glfwPlatformGetRequiredInstanceExtensionsWin32(char** extensions);
 int _glfwPlatformGetPhysicalDevicePresentationSupportWin32(VkInstance instance,
-                                                             VkPhysicalDevice device,
-                                                             uint32_t queuefamily);
+                                                           VkPhysicalDevice device,
+                                                           uint32_t queuefamily);
 VkResult _glfwPlatformCreateWindowSurfaceWin32(VkInstance instance,
-                                                 _GLFWwindow* window,
-                                                 const VkAllocationCallbacks* allocator,
-                                                 VkSurfaceKHR* surface);
+                                               _GLFWwindow* window,
+                                               const VkAllocationCallbacks* allocator,
+                                               VkSurfaceKHR* surface);
 
 static const struct _GLFWplatformfunctions _glfwFunctionsWin32 = {
     ._glfwPlatformInitFunc = _glfwPlatformInitWin32,

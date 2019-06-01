@@ -213,7 +213,7 @@ const char* _glfwPlatformGetVersionStringCocoa(void);
 void _glfwPlatformFreeMonitorCocoa(_GLFWmonitor* monitor);
 void _glfwPlatformGetMonitorPosCocoa(_GLFWmonitor* monitor, int* xpos, int* ypos);
 void _glfwPlatformGetMonitorContentScaleCocoa(_GLFWmonitor* monitor,
-                                            float* xscale, float* yscale);
+                                              float* xscale, float* yscale);
 void _glfwPlatformGetMonitorWorkareaCocoa(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height);
 GLFWvidmode* _glfwPlatformGetVideoModesCocoa(_GLFWmonitor* monitor, int* count);
 void _glfwPlatformGetVideoModeCocoa(_GLFWmonitor* monitor, GLFWvidmode* mode);
@@ -222,9 +222,9 @@ void _glfwPlatformSetGammaRampCocoa(_GLFWmonitor* monitor, const GLFWgammaramp* 
 
 // window
 int _glfwPlatformCreateWindowCocoa(_GLFWwindow* window,
-                                     const _GLFWwndconfig* wndconfig,
-                                     const _GLFWctxconfig* ctxconfig,
-                                     const _GLFWfbconfig* fbconfig);
+                                   const _GLFWwndconfig* wndconfig,
+                                   const _GLFWctxconfig* ctxconfig,
+                                   const _GLFWfbconfig* fbconfig);
 void _glfwPlatformDestroyWindowCocoa(_GLFWwindow* window);
 void _glfwPlatformSetWindowTitleCocoa(_GLFWwindow* window, const char* title);
 void _glfwPlatformSetWindowIconCocoa(_GLFWwindow* window, int count, const GLFWimage* images);
@@ -249,13 +249,13 @@ void _glfwPlatformHideWindowCocoa(_GLFWwindow* window);
 void _glfwPlatformRequestWindowAttentionCocoa(_GLFWwindow* window);
 void _glfwPlatformFocusWindowCocoa(_GLFWwindow* window);
 void _glfwPlatformSetWindowMonitorCocoa(_GLFWwindow* window,
-                                          _GLFWmonitor* monitor,
-                                          int xpos, int ypos,
-                                          int width, int height,
-                                          int refreshRate);
+                                        _GLFWmonitor* monitor,
+                                        int xpos, int ypos,
+                                        int width, int height,
+                                        int refreshRate);
 int _glfwPlatformCreateCursorCocoa(_GLFWcursor* cursor,
-                                     const GLFWimage* image,
-                                     int xhot, int yhot);
+                                   const GLFWimage* image,
+                                   int xhot, int yhot);
 int _glfwPlatformWindowFocusedCocoa(_GLFWwindow* window);
 int _glfwPlatformWindowIconifiedCocoa(_GLFWwindow* window);
 int _glfwPlatformWindowVisibleCocoa(_GLFWwindow* window);
@@ -285,12 +285,12 @@ void _glfwPlatformSetClipboardStringCocoa(const char* string);
 const char* _glfwPlatformGetClipboardStringCocoa(void);
 void _glfwPlatformGetRequiredInstanceExtensionsCocoa(char** extensions);
 int _glfwPlatformGetPhysicalDevicePresentationSupportCocoa(VkInstance instance,
-                                                             VkPhysicalDevice device,
-                                                             uint32_t queuefamily);
+                                                           VkPhysicalDevice device,
+                                                           uint32_t queuefamily);
 VkResult _glfwPlatformCreateWindowSurfaceCocoa(VkInstance instance,
-                                                 _GLFWwindow* window,
-                                                 const VkAllocationCallbacks* allocator,
-                                                 VkSurfaceKHR* surface);
+                                               _GLFWwindow* window,
+                                               const VkAllocationCallbacks* allocator,
+                                               VkSurfaceKHR* surface);
 
 static const struct _GLFWplatformfunctions _glfwFunctionsCocoa = {
     ._glfwPlatformInitFunc = _glfwPlatformInitCocoa,

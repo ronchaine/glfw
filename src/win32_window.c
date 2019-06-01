@@ -300,9 +300,9 @@ static void disableRawMouseMotion(_GLFWwindow* window)
 static void disableCursor(_GLFWwindow* window)
 {
     _glfw.win32.disabledCursorWindow = window;
-    _glfwPlatformGetCursorPos(window,
-                              &_glfw.win32.restoreCursorPosX,
-                              &_glfw.win32.restoreCursorPosY);
+    _glfwPlatformGetCursorPosWin32(window,
+                                   &_glfw.win32.restoreCursorPosX,
+                                   &_glfw.win32.restoreCursorPosY);
     updateCursorImage(window);
     _glfwCenterCursorInContentArea(window);
     updateClipRect(window);
@@ -320,9 +320,9 @@ static void enableCursor(_GLFWwindow* window)
 
     _glfw.win32.disabledCursorWindow = NULL;
     updateClipRect(NULL);
-    _glfwPlatformSetCursorPos(window,
-                              _glfw.win32.restoreCursorPosX,
-                              _glfw.win32.restoreCursorPosY);
+    _glfwPlatformSetCursorPosWin32(window,
+                                   _glfw.win32.restoreCursorPosX,
+                                   _glfw.win32.restoreCursorPosY);
     updateCursorImage(window);
 }
 
@@ -674,7 +674,7 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
                 enableCursor(window);
 
             if (window->monitor && window->autoIconify)
-                _glfwPlatformIconifyWindow(window);
+                _glfwPlatformIconifyWindowWin32(window);
 
             _glfwInputWindowFocus(window, GLFW_FALSE);
             return 0;
@@ -1227,8 +1227,8 @@ static int createNativeWindow(_GLFWwindow* window,
         // NOTE: This window placement is temporary and approximate, as the
         //       correct position and size cannot be known until the monitor
         //       video mode has been picked in _glfwSetVideoModeWin32
-        _glfwPlatformGetMonitorPos(window->monitor, &xpos, &ypos);
-        _glfwPlatformGetVideoMode(window->monitor, &mode);
+        _glfwPlatformGetMonitorPosWin32(window->monitor, &xpos, &ypos);
+        _glfwPlatformGetVideoModeWin32(window->monitor, &mode);
         fullWidth  = mode.width;
         fullHeight = mode.height;
     }
@@ -1297,7 +1297,7 @@ static int createNativeWindow(_GLFWwindow* window,
         if (wndconfig->scaleToMonitor)
         {
             float xscale, yscale;
-            _glfwPlatformGetWindowContentScale(window, &xscale, &yscale);
+            _glfwPlatformGetWindowContentScaleWin32(window, &xscale, &yscale);
             rect.right = (int) (rect.right * xscale);
             rect.bottom = (int) (rect.bottom * yscale);
         }
@@ -1419,8 +1419,8 @@ int _glfwPlatformCreateWindowWin32(_GLFWwindow* window,
 
     if (window->monitor)
     {
-        _glfwPlatformShowWindow(window);
-        _glfwPlatformFocusWindow(window);
+        _glfwPlatformShowWindowWin32(window);
+        _glfwPlatformFocusWindowWin32(window);
         acquireMonitor(window);
         fitToMonitor(window);
     }
@@ -1453,7 +1453,7 @@ void _glfwPlatformDestroyWindowWin32(_GLFWwindow* window)
         DestroyIcon(window->win32.smallIcon);
 }
 
-void _glfwPlatformSetWindowTitle(_GLFWwindow* window, const char* title)
+void _glfwPlatformSetWindowTitleWin32(_GLFWwindow* window, const char* title)
 {
     WCHAR* wideTitle = _glfwCreateWideStringFromUTF8Win32(title);
     if (!wideTitle)
@@ -1966,14 +1966,14 @@ void _glfwPlatformPollEventsWin32(void)
     if (window)
     {
         int width, height;
-        _glfwPlatformGetWindowSize(window, &width, &height);
+        _glfwPlatformGetWindowSizeWin32(window, &width, &height);
 
         // NOTE: Re-center the cursor only if it has moved since the last call,
         //       to avoid breaking glfwWaitEvents with WM_MOUSEMOVE
         if (window->win32.lastCursorPosX != width / 2 ||
             window->win32.lastCursorPosY != height / 2)
         {
-            _glfwPlatformSetCursorPos(window, width / 2, height / 2);
+            _glfwPlatformSetCursorPosWin32(window, width / 2, height / 2);
         }
     }
 }

@@ -450,7 +450,7 @@ static GLFWbool initializeTIS(void)
 {
     [NSApp stop:nil];
 
-    _glfwPlatformPostEmptyEvent();
+    _glfwPlatformPostEmptyEventCocoa();
 }
 
 - (void)applicationDidHide:(NSNotification *)notification
@@ -468,7 +468,7 @@ static GLFWbool initializeTIS(void)
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
 
-int _glfwPlatformInit(void)
+int _glfwPlatformInitCocoa(void)
 {
     @autoreleasepool {
 
@@ -538,7 +538,7 @@ int _glfwPlatformInit(void)
     } // autoreleasepool
 }
 
-void _glfwPlatformTerminate(void)
+void _glfwPlatformTerminateCocoa(void)
 {
     @autoreleasepool {
 
@@ -585,7 +585,7 @@ void _glfwPlatformTerminate(void)
     } // autoreleasepool
 }
 
-const char* _glfwPlatformGetVersionString(void)
+const char* _glfwPlatformGetVersionStringCocoa(void)
 {
     return _GLFW_VERSION_NUMBER " Cocoa NSGL EGL OSMesa"
 #if defined(_GLFW_BUILD_DLL)

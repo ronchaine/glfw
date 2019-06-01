@@ -197,3 +197,178 @@ void _glfwRestoreVideoModeNS(_GLFWmonitor* monitor);
 
 float _glfwTransformYNS(float y);
 
+//////////////////////////////////////////////////////////////////////////
+//////                       GLFW platform API                      //////
+//////////////////////////////////////////////////////////////////////////
+
+// init
+int  _glfwPlatformInitCocoa(void);
+void _glfwPlatformTerminateCocoa(void);
+const char* _glfwPlatformGetVersionStringCocoa(void);
+
+// monitor
+void _glfwPlatformFreeMonitorCocoa(_GLFWmonitor* monitor);
+void _glfwPlatformGetMonitorPosCocoa(_GLFWmonitor* monitor, int* xpos, int* ypos);
+void _glfwPlatformGetMonitorContentScaleCocoa(_GLFWmonitor* monitor,
+                                            float* xscale, float* yscale);
+void _glfwPlatformGetMonitorWorkareaCocoa(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height);
+GLFWvidmode* _glfwPlatformGetVideoModesCocoa(_GLFWmonitor* monitor, int* count);
+void _glfwPlatformGetVideoModeCocoa(_GLFWmonitor* monitor, GLFWvidmode* mode);
+GLFWbool _glfwPlatformGetGammaRampCocoa(_GLFWmonitor* monitor, GLFWgammaramp* ramp);
+void _glfwPlatformSetGammaRampCocoa(_GLFWmonitor* monitor, const GLFWgammaramp* ramp);
+
+// window
+int _glfwPlatformCreateWindowCocoa(_GLFWwindow* window,
+                                     const _GLFWwndconfig* wndconfig,
+                                     const _GLFWctxconfig* ctxconfig,
+                                     const _GLFWfbconfig* fbconfig);
+void _glfwPlatformDestroyWindowCocoa(_GLFWwindow* window);
+void _glfwPlatformSetWindowTitleCocoa(_GLFWwindow* window, const char* title);
+void _glfwPlatformSetWindowIconCocoa(_GLFWwindow* window, int count, const GLFWimage* images);
+void _glfwPlatformGetWindowPosCocoa(_GLFWwindow* window, int* xpos, int* ypos);
+void _glfwPlatformSetWindowPosCocoa(_GLFWwindow* window, int xpos, int ypos);
+void _glfwPlatformGetWindowSizeCocoa(_GLFWwindow* window, int* width, int* height);
+void _glfwPlatformSetWindowSizeCocoa(_GLFWwindow* window, int width, int height);
+void _glfwPlatformSetWindowSizeLimitsCocoa(_GLFWwindow* window,
+                                             int minwidth, int minheight,
+                                             int maxwidth, int maxheight);
+void _glfwPlatformSetWindowAspectRatioCocoa(_GLFWwindow* window, int numer, int denom);
+void _glfwPlatformGetFramebufferSizeCocoa(_GLFWwindow* window, int* width, int* height);
+void _glfwPlatformGetWindowFrameSizeCocoa(_GLFWwindow* window,
+                                            int* left, int* top,
+                                            int* right, int* bottom);
+void _glfwPlatformGetWindowContentScaleCocoa(_GLFWwindow* window, float* xscale, float* yscale);
+void _glfwPlatformIconifyWindowCocoa(_GLFWwindow* window);
+void _glfwPlatformRestoreWindowCocoa(_GLFWwindow* window);
+void _glfwPlatformMaximizeWindowCocoa(_GLFWwindow* window);
+void _glfwPlatformShowWindowCocoa(_GLFWwindow* window);
+void _glfwPlatformHideWindowCocoa(_GLFWwindow* window);
+void _glfwPlatformRequestWindowAttentionCocoa(_GLFWwindow* window);
+void _glfwPlatformFocusWindowCocoa(_GLFWwindow* window);
+void _glfwPlatformSetWindowMonitorCocoa(_GLFWwindow* window,
+                                          _GLFWmonitor* monitor,
+                                          int xpos, int ypos,
+                                          int width, int height,
+                                          int refreshRate);
+int _glfwPlatformCreateCursorCocoa(_GLFWcursor* cursor,
+                                     const GLFWimage* image,
+                                     int xhot, int yhot);
+int _glfwPlatformWindowFocusedCocoa(_GLFWwindow* window);
+int _glfwPlatformWindowIconifiedCocoa(_GLFWwindow* window);
+int _glfwPlatformWindowVisibleCocoa(_GLFWwindow* window);
+int _glfwPlatformWindowMaximizedCocoa(_GLFWwindow* window);
+int _glfwPlatformWindowHoveredCocoa(_GLFWwindow* window);
+int _glfwPlatformFramebufferTransparentCocoa(_GLFWwindow* window);
+void _glfwPlatformSetWindowResizableCocoa(_GLFWwindow* window, GLFWbool enabled);
+void _glfwPlatformSetWindowDecoratedCocoa(_GLFWwindow* window, GLFWbool enabled);
+void _glfwPlatformSetWindowFloatingCocoa(_GLFWwindow* window, GLFWbool enabled);
+float _glfwPlatformGetWindowOpacityCocoa(_GLFWwindow* window);
+void _glfwPlatformSetWindowOpacityCocoa(_GLFWwindow* window, float opacity);
+void _glfwPlatformSetRawMouseMotionCocoa(_GLFWwindow *window, GLFWbool enabled);
+GLFWbool _glfwPlatformRawMouseMotionSupportedCocoa(void);
+void _glfwPlatformPollEventsCocoa(void);
+void _glfwPlatformWaitEventsCocoa(void);
+void _glfwPlatformWaitEventsTimeoutCocoa(double timeout);
+void _glfwPlatformPostEmptyEventCocoa(void);
+void _glfwPlatformGetCursorPosCocoa(_GLFWwindow* window, double* xpos, double* ypos);
+void _glfwPlatformSetCursorPosCocoa(_GLFWwindow* window, double x, double y);
+void _glfwPlatformSetCursorModeCocoa(_GLFWwindow* window, int mode);
+const char* _glfwPlatformGetScancodeNameCocoa(int scancode);
+int _glfwPlatformGetKeyScancodeCocoa(int key);
+int _glfwPlatformCreateStandardCursorCocoa(_GLFWcursor* cursor, int shape);
+void _glfwPlatformDestroyCursorCocoa(_GLFWcursor* cursor);
+void _glfwPlatformSetCursorCocoa(_GLFWwindow* window, _GLFWcursor* cursor);
+void _glfwPlatformSetClipboardStringCocoa(const char* string);
+const char* _glfwPlatformGetClipboardStringCocoa(void);
+void _glfwPlatformGetRequiredInstanceExtensionsCocoa(char** extensions);
+int _glfwPlatformGetPhysicalDevicePresentationSupportCocoa(VkInstance instance,
+                                                             VkPhysicalDevice device,
+                                                             uint32_t queuefamily);
+VkResult _glfwPlatformCreateWindowSurfaceCocoa(VkInstance instance,
+                                                 _GLFWwindow* window,
+                                                 const VkAllocationCallbacks* allocator,
+                                                 VkSurfaceKHR* surface);
+
+static const struct _GLFWplatformfunctions _glfwFunctionsCocoa = {
+    ._glfwPlatformInitFunc = _glfwPlatformInitCocoa,
+    ._glfwPlatformTerminateFunc = _glfwPlatformTerminateCocoa,
+    ._glfwPlatformGetVersionStringFunc = _glfwPlatformGetVersionStringCocoa,
+
+    ._glfwPlatformFreeMonitorFunc = _glfwPlatformFreeMonitorCocoa,
+    ._glfwPlatformGetMonitorPosFunc = _glfwPlatformGetMonitorPosCocoa,
+    ._glfwPlatformGetMonitorContentScaleFunc = _glfwPlatformGetMonitorContentScaleCocoa,
+    ._glfwPlatformGetMonitorWorkareaFunc = _glfwPlatformGetMonitorWorkareaCocoa,
+    ._glfwPlatformGetVideoModesFunc = _glfwPlatformGetVideoModesCocoa,
+    ._glfwPlatformGetVideoModeFunc = _glfwPlatformGetVideoModeCocoa,
+    ._glfwPlatformGetGammaRampFunc = _glfwPlatformGetGammaRampCocoa,
+    ._glfwPlatformSetGammaRampFunc = _glfwPlatformSetGammaRampCocoa,
+
+    ._glfwPlatformCreateWindowFunc = _glfwPlatformCreateWindowCocoa,
+    ._glfwPlatformDestroyWindowFunc = _glfwPlatformDestroyWindowCocoa,
+    ._glfwPlatformSetWindowTitleFunc = _glfwPlatformSetWindowTitleCocoa,
+    ._glfwPlatformSetWindowIconFunc = _glfwPlatformSetWindowIconCocoa,
+    ._glfwPlatformGetWindowPosFunc = _glfwPlatformGetWindowPosCocoa,
+    ._glfwPlatformSetWindowPosFunc = _glfwPlatformSetWindowPosCocoa,
+    ._glfwPlatformGetWindowSizeFunc = _glfwPlatformGetWindowSizeCocoa,
+    ._glfwPlatformSetWindowSizeFunc = _glfwPlatformSetWindowSizeCocoa,
+    ._glfwPlatformSetWindowSizeLimitsFunc = _glfwPlatformSetWindowSizeLimitsCocoa,
+    ._glfwPlatformSetWindowAspectRatioFunc = _glfwPlatformSetWindowAspectRatioCocoa,
+    ._glfwPlatformGetFramebufferSizeFunc = _glfwPlatformGetFramebufferSizeCocoa,
+    ._glfwPlatformGetWindowFrameSizeFunc = _glfwPlatformGetWindowFrameSizeCocoa,
+    ._glfwPlatformGetWindowContentScaleFunc = _glfwPlatformGetWindowContentScaleCocoa,
+    ._glfwPlatformIconifyWindowFunc = _glfwPlatformIconifyWindowCocoa,
+    ._glfwPlatformRestoreWindowFunc = _glfwPlatformRestoreWindowCocoa,
+    ._glfwPlatformMaximizeWindowFunc = _glfwPlatformMaximizeWindowCocoa,
+    ._glfwPlatformShowWindowFunc = _glfwPlatformShowWindowCocoa,
+    ._glfwPlatformHideWindowFunc = _glfwPlatformHideWindowCocoa,
+    ._glfwPlatformRequestWindowAttentionFunc = _glfwPlatformRequestWindowAttentionCocoa,
+    ._glfwPlatformFocusWindowFunc = _glfwPlatformFocusWindowCocoa,
+    ._glfwPlatformSetWindowMonitorFunc = _glfwPlatformSetWindowMonitorCocoa,
+    ._glfwPlatformCreateCursorFunc = _glfwPlatformCreateCursorCocoa,
+    ._glfwPlatformWindowFocusedFunc = _glfwPlatformWindowFocusedCocoa,
+    ._glfwPlatformWindowIconifiedFunc = _glfwPlatformWindowIconifiedCocoa,
+    ._glfwPlatformWindowVisibleFunc =  _glfwPlatformWindowVisibleCocoa,
+    ._glfwPlatformWindowMaximizedFunc = _glfwPlatformWindowMaximizedCocoa,
+    ._glfwPlatformWindowHoveredFunc = _glfwPlatformWindowHoveredCocoa,
+    ._glfwPlatformFramebufferTransparentFunc = _glfwPlatformFramebufferTransparentCocoa,
+    ._glfwPlatformSetWindowResizableFunc = _glfwPlatformSetWindowResizableCocoa,
+    ._glfwPlatformSetWindowDecoratedFunc = _glfwPlatformSetWindowDecoratedCocoa,
+    ._glfwPlatformSetWindowFloatingFunc = _glfwPlatformSetWindowFloatingCocoa,
+    ._glfwPlatformGetWindowOpacityFunc = _glfwPlatformGetWindowOpacityCocoa,
+    ._glfwPlatformSetWindowOpacityFunc = _glfwPlatformSetWindowOpacityCocoa,
+    ._glfwPlatformSetRawMouseMotionFunc = _glfwPlatformSetRawMouseMotionCocoa,
+    ._glfwPlatformRawMouseMotionSupportedFunc = _glfwPlatformRawMouseMotionSupportedCocoa,
+    ._glfwPlatformPollEventsFunc = _glfwPlatformPollEventsCocoa,
+    ._glfwPlatformWaitEventsFunc = _glfwPlatformWaitEventsCocoa,
+    ._glfwPlatformWaitEventsTimeoutFunc = _glfwPlatformWaitEventsTimeoutCocoa,
+    ._glfwPlatformPostEmptyEventFunc = _glfwPlatformPostEmptyEventCocoa,
+    ._glfwPlatformGetCursorPosFunc = _glfwPlatformGetCursorPosCocoa,
+    ._glfwPlatformSetCursorPosFunc = _glfwPlatformSetCursorPosCocoa,
+    ._glfwPlatformSetCursorModeFunc = _glfwPlatformSetCursorModeCocoa,
+    ._glfwPlatformGetScancodeNameFunc = _glfwPlatformGetScancodeNameCocoa,
+    ._glfwPlatformGetKeyScancodeFunc = _glfwPlatformGetKeyScancodeCocoa,
+    ._glfwPlatformCreateStandardCursorFunc = _glfwPlatformCreateStandardCursorCocoa,
+    ._glfwPlatformDestroyCursorFunc = _glfwPlatformDestroyCursorCocoa,
+    ._glfwPlatformSetCursorFunc = _glfwPlatformSetCursorCocoa,
+    ._glfwPlatformSetClipboardStringFunc = _glfwPlatformSetClipboardStringCocoa,
+    ._glfwPlatformGetClipboardStringFunc = _glfwPlatformGetClipboardStringCocoa,
+    ._glfwPlatformGetRequiredInstanceExtensionsFunc = _glfwPlatformGetRequiredInstanceExtensionsCocoa,
+    ._glfwPlatformGetPhysicalDevicePresentationSupportFunc = _glfwPlatformGetPhysicalDevicePresentationSupportCocoa,
+    ._glfwPlatformCreateWindowSurfaceFunc = _glfwPlatformCreateWindowSurfaceCocoa,
+
+    ._glfwPlatformCreateTlsFunc = _glfwPlatformCreateTlsCocoa,
+    ._glfwPlatformDestroyTlsFunc = _glfwPlatformDestroyTlsCocoa,
+    ._glfwPlatformGetTlsFunc = _glfwPlatformGetTlsCocoa,
+    ._glfwPlatformSetTlsFunc = _glfwPlatformSetTlsCocoa,
+
+    ._glfwPlatformCreateMutexFunc = _glfwPlatformCreateMutexCocoa,
+    ._glfwPlatformDestroyMutexFunc = _glfwPlatformDestroyMutexCocoa,
+    ._glfwPlatformLockMutexFunc = _glfwPlatformLockMutexCocoa,
+    ._glfwPlatformUnlockMutexFunc = _glfwPlatformUnlockMutexCocoa,
+
+    ._glfwPlatformGetTimerValueFunc = _glfwPlatformGetTimerValueCocoa,
+    ._glfwPlatformGetTimerFrequencyFunc = _glfwPlatformGetTimerFrequencyCocoa,
+    
+    ._glfwPlatformPollJoystickFunc = _glfwPlatformPollJoystickCocoa,
+    ._glfwPlatformUpdateGamepadGUIDFunc = _glfwPlatformUpdateGamepadGUIDCocoa,
+};

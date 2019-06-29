@@ -8,7 +8,7 @@ project('glfw', 'c',
   ],
 )
 
-add_global_arguments('-DMESON_BUILD', language: 'c')
+add_project_arguments('-DMESON_BUILD', language: 'c')
 
 compiler  = meson.get_compiler('c')
 os        = host_machine.system()

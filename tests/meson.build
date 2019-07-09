@@ -1,5 +1,5 @@
 tests_linker_args = []
-tests_dependencies = [glfw_dependency, math_dep]
+tests_dependencies = [glfw_dep, math_dep]
 
 if compiler.get_id() == 'msvc'
   tests_linker_args += '/ENTRY:mainCRTStartup'

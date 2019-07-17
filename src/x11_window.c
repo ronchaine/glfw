@@ -1180,6 +1180,18 @@ static void processEvent(XEvent *event)
         }
     }
 
+    if (_glfw.x11.xkb.available)
+    {
+        if (event->type == _glfw.x11.xkb.eventBase + XkbEventCode)
+        {
+            if (((XkbEvent*) event)->any.xkb_type == XkbStateNotify &&
+                (((XkbEvent*) event)->state.changed & XkbGroupStateMask))
+            {
+                _glfw.x11.xkb.group = ((XkbEvent*) event)->state.group;
+            }
+        }
+    }
+
     if (event->type == GenericEvent)
     {
         if (_glfw.x11.xi.available)
@@ -1746,9 +1758,6 @@ static void processEvent(XEvent *event)
 
         case FocusIn:
         {
-            if (window->cursorMode == GLFW_CURSOR_DISABLED)
-                disableCursor(window);
-
             if (event->xfocus.mode == NotifyGrab ||
                 event->xfocus.mode == NotifyUngrab)
             {
@@ -1756,6 +1765,9 @@ static void processEvent(XEvent *event)
                 // key chords and window dragging
                 return;
             }
+
+            if (window->cursorMode == GLFW_CURSOR_DISABLED)
+                disableCursor(window);
 
             if (window->x11.ic)
                 XSetICFocus(window->x11.ic);
@@ -1766,9 +1778,6 @@ static void processEvent(XEvent *event)
 
         case FocusOut:
         {
-            if (window->cursorMode == GLFW_CURSOR_DISABLED)
-                enableCursor(window);
-
             if (event->xfocus.mode == NotifyGrab ||
                 event->xfocus.mode == NotifyUngrab)
             {
@@ -1776,6 +1785,9 @@ static void processEvent(XEvent *event)
                 // key chords and window dragging
                 return;
             }
+
+            if (window->cursorMode == GLFW_CURSOR_DISABLED)
+                enableCursor(window);
 
             if (window->x11.ic)
                 XUnsetICFocus(window->x11.ic);
@@ -2780,7 +2792,8 @@ const char* _glfwPlatformGetScancodeName(int scancode)
     if (!_glfw.x11.xkb.available)
         return NULL;
 
-    const KeySym keysym = XkbKeycodeToKeysym(_glfw.x11.display, scancode, 0, 0);
+    const KeySym keysym = XkbKeycodeToKeysym(_glfw.x11.display,
+                                             scancode, _glfw.x11.xkb.group, 0);
     if (keysym == NoSymbol)
         return NULL;
 

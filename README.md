@@ -199,6 +199,7 @@ skills.
  - Mário Freitas
  - GeO4d
  - Marcus Geelnard
+ - Charles Giessen
  - Stephen Gowen
  - Kovid Goyal
  - Eloi Marín Gratacós
@@ -245,6 +246,7 @@ skills.
  - Jonathan Mercier
  - Marcel Metz
  - Liam Middlebrook
+ - Ave Milia
  - Jonathan Miller
  - Kenneth Miller
  - Bruce Mitchener

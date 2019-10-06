@@ -481,7 +481,7 @@ static int translateKey(WPARAM wParam, LPARAM lParam)
         DWORD time;
 
         // Right side keys have the extended key bit set
-        if (lParam & 0x01000000)
+        if (HIWORD(lParam) & KF_EXTENDED)
             return GLFW_KEY_RIGHT_CONTROL;
 
         // HACK: Alt Gr sends Left Ctrl and then Right Alt in close sequence
@@ -497,7 +497,7 @@ static int translateKey(WPARAM wParam, LPARAM lParam)
                 next.message == WM_SYSKEYUP)
             {
                 if (next.wParam == VK_MENU &&
-                    (next.lParam & 0x01000000) &&
+                    (HIWORD(next.lParam) & KF_EXTENDED) &&
                     next.time == time)
                 {
                     // Next message is Right Alt down so discard this
@@ -740,8 +740,8 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
         case WM_SYSKEYUP:
         {
             const int key = translateKey(wParam, lParam);
-            const int scancode = (lParam >> 16) & 0x1ff;
-            const int action = ((lParam >> 31) & 1) ? GLFW_RELEASE : GLFW_PRESS;
+            const int scancode = (HIWORD(lParam) & 0x1ff);
+            const int action = (HIWORD(lParam) & KF_UP) ? GLFW_RELEASE : GLFW_PRESS;
             const int mods = getKeyMods();
 
             if (key == _GLFW_KEY_INVALID)
@@ -1276,9 +1276,9 @@ static int createNativeWindow(_GLFWwindow* window,
 
     window->win32.scaleToMonitor = wndconfig->scaleToMonitor;
 
-    // Adjust window size to account for DPI scaling of the window frame and
-    // optionally DPI scaling of the content area
-    // This cannot be done until we know what monitor it was placed on
+    // Adjust window rect to account for DPI scaling of the window frame and
+    // (if enabled) DPI scaling of the content area
+    // This cannot be done until we know what monitor the window was placed on
     if (!window->monitor)
     {
         RECT rect = { 0, 0, wndconfig->width, wndconfig->height };
@@ -1934,8 +1934,8 @@ void _glfwPlatformPollEvents(void)
         window = GetPropW(handle, L"GLFW");
         if (window)
         {
-            const GLFWbool lshift = (GetAsyncKeyState(VK_LSHIFT) >> 15) & 1;
-            const GLFWbool rshift = (GetAsyncKeyState(VK_RSHIFT) >> 15) & 1;
+            const GLFWbool lshift = (GetAsyncKeyState(VK_LSHIFT) & 0x8000) != 0;
+            const GLFWbool rshift = (GetAsyncKeyState(VK_RSHIFT) & 0x8000) != 0;
 
             if (!lshift && window->keys[GLFW_KEY_LEFT_SHIFT] == GLFW_PRESS)
             {

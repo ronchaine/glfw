@@ -339,7 +339,7 @@ typedef struct _GLFWlibraryWayland
 typedef struct _GLFWmonitorWayland
 {
     struct wl_output*           output;
-    int                         name;
+    uint32_t                    name;
     int                         currentMode;
 
     int                         x;

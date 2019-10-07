@@ -100,8 +100,8 @@ endif
 
 subdir('src')
 
-install_headers('include/GLFW/glfw3.h')
-install_headers('include/GLFW/glfw3native.h')
+install_headers('include/GLFW/glfw3.h', subdir : 'GLFW')
+install_headers('include/GLFW/glfw3native.h', subdir : 'GLFW')
 
 if not get_option('glfw_build_examples').disabled()
   subdir('examples')

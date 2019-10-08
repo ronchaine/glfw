@@ -435,6 +435,9 @@ GLFWAPI int glfwInit(void)
     memset(&_glfw, 0, sizeof(_glfw));
     _glfw.hints.init = _glfwInitHints;
 
+    const char* wayland_display = getenv("WAYLAND_DISPLAY");
+    const char* x11_display = getenv("DISPLAY");
+
     if (_glfw.hints.init.platform == GLFW_DONT_CARE)
     {
         #if defined (_GLFW_COCOA)
@@ -442,8 +445,6 @@ GLFWAPI int glfwInit(void)
         #elif defined(_GLFW_WIN32)
             _glfw.platform = GLFW_PLATFORM_WIN32;
         #elif defined(_GLFW_WAYLAND) && defined (_GLFW_X11)
-            const char* wayland_display = getenv("WAYLAND_DISPLAY");
-            const char* x11_display = getenv("DISPLAY");
             if (wayland_display != NULL)
             {
                 _glfw.platform = GLFW_PLATFORM_WAYLAND;
@@ -477,6 +478,11 @@ GLFWAPI int glfwInit(void)
         #endif
         #if defined(_GLFW_X11)
         case GLFW_PLATFORM_X11:
+            if (x11_display == NULL)
+            {
+                _glfwInputError(GLFW_INVALID_ENUM, "Cannot open X11 display");
+                return GLFW_FALSE;
+            }
             _glfwPlatformLoadFunctions(_glfwFunctionsX11);
             break;
         #endif

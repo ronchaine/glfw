@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1)
 
 project(GLFW VERSION 3.4.0 LANGUAGES C)
 
@@ -75,7 +75,7 @@ if (MSVC)
         include(CheckIncludeFile)
         check_include_file(dinput.h DINPUT_H_FOUND)
         if (NOT DINPUT_H_FOUND)
-            message(FATAL_ERROR "DirectX 9 SDK not found")
+            message(FATAL_ERROR "DirectX 9 headers not found; install DirectX 9 SDK")
         endif()
         # Workaround for VS 2008 not shipping with stdint.h
         list(APPEND glfw_INCLUDE_DIRS "${GLFW_SOURCE_DIR}/deps/vs2008")
@@ -207,34 +207,28 @@ if (_GLFW_X11)
 
     # Check for XRandR (modern resolution switching and gamma control)
     if (NOT X11_Xrandr_INCLUDE_PATH)
-        message(FATAL_ERROR "The RandR headers were not found")
+        message(FATAL_ERROR "RandR headers not found; install libxrandr development package")
     endif()
 
     # Check for Xinerama (legacy multi-monitor support)
     if (NOT X11_Xinerama_INCLUDE_PATH)
-        message(FATAL_ERROR "The Xinerama headers were not found")
+        message(FATAL_ERROR "Xinerama headers not found; install libxinerama development package")
     endif()
 
     # Check for Xkb (X keyboard extension)
     if (NOT X11_Xkb_INCLUDE_PATH)
-        message(FATAL_ERROR "The X keyboard extension headers were not found")
+        message(FATAL_ERROR "XKB headers not found; install X11 development package")
     endif()
 
     # Check for Xcursor (cursor creation from RGBA images)
     if (NOT X11_Xcursor_INCLUDE_PATH)
-        message(FATAL_ERROR "The Xcursor headers were not found")
+        message(FATAL_ERROR "Xcursor headers not found; install libxcursor development package")
     endif()
 
     # Check for XInput (modern HID input)
     if (NOT X11_Xi_INCLUDE_PATH)
-        message(FATAL_ERROR "The XInput headers were not found")
+        message(FATAL_ERROR "XInput headers not found; install libxi development package")
     endif()
-
-    list(APPEND glfw_INCLUDE_DIRS "${X11_Xrandr_INCLUDE_PATH}"
-                                  "${X11_Xinerama_INCLUDE_PATH}"
-                                  "${X11_Xkb_INCLUDE_PATH}"
-                                  "${X11_Xcursor_INCLUDE_PATH}"
-                                  "${X11_Xi_INCLUDE_PATH}")
 endif()
 
 #--------------------------------------------------------------------
@@ -365,9 +359,14 @@ if (GLFW_INSTALL)
     install(FILES "${GLFW_BINARY_DIR}/src/glfw3.pc"
             DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
 
+    if (GLFW_BUILD_DOCS)
+        install(DIRECTORY "${GLFW_BINARY_DIR}/docs/html"
+                DESTINATION "${CMAKE_INSTALL_DOCDIR}")
+    endif()
+
     # Only generate this target if no higher-level project already has
     if (NOT TARGET uninstall)
-        configure_file(cmake_uninstall.cmake.in
+        configure_file(CMake/cmake_uninstall.cmake.in
                        cmake_uninstall.cmake IMMEDIATE @ONLY)
 
         add_custom_target(uninstall

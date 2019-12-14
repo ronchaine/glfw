@@ -411,7 +411,7 @@ static void updateFramebufferTransparency(const _GLFWwindow* window)
             // issue.  When set to black, something is making the hit test
             // not resize with the window frame.
             SetLayeredWindowAttributes(window->win32.handle,
-                                       RGB(0, 193, 48), 255, LWA_COLORKEY);
+                                       RGB(255, 0, 255), 255, LWA_COLORKEY);
         }
 
         DeleteObject(region);
@@ -699,7 +699,12 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
 
                 // User trying to access application menu using ALT?
                 case SC_KEYMENU:
-                    return 0;
+                {
+                    if (!window->win32.keymenu)
+                        return 0;
+
+                    break;
+                }
             }
             break;
         }
@@ -731,6 +736,10 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
             }
 
             _glfwInputChar(window, (unsigned int) wParam, getKeyMods(), plain);
+
+            if (uMsg == WM_SYSCHAR && window->win32.keymenu)
+                break;
+
             return 0;
         }
 
@@ -1275,6 +1284,7 @@ static int createNativeWindow(_GLFWwindow* window,
     }
 
     window->win32.scaleToMonitor = wndconfig->scaleToMonitor;
+    window->win32.keymenu = wndconfig->win32.keymenu;
 
     // Adjust window rect to account for DPI scaling of the window frame and
     // (if enabled) DPI scaling of the content area
@@ -2058,14 +2068,25 @@ int _glfwPlatformCreateStandardCursor(_GLFWcursor* cursor, int shape)
         id = OCR_IBEAM;
     else if (shape == GLFW_CROSSHAIR_CURSOR)
         id = OCR_CROSS;
-    else if (shape == GLFW_HAND_CURSOR)
+    else if (shape == GLFW_POINTING_HAND_CURSOR)
         id = OCR_HAND;
-    else if (shape == GLFW_HRESIZE_CURSOR)
+    else if (shape == GLFW_RESIZE_EW_CURSOR)
         id = OCR_SIZEWE;
-    else if (shape == GLFW_VRESIZE_CURSOR)
+    else if (shape == GLFW_RESIZE_NS_CURSOR)
         id = OCR_SIZENS;
+    else if (shape == GLFW_RESIZE_NWSE_CURSOR)
+        id = OCR_SIZENWSE;
+    else if (shape == GLFW_RESIZE_NESW_CURSOR)
+        id = OCR_SIZENESW;
+    else if (shape == GLFW_RESIZE_ALL_CURSOR)
+        id = OCR_SIZEALL;
+    else if (shape == GLFW_NOT_ALLOWED_CURSOR)
+        id = OCR_NO;
     else
+    {
+        _glfwInputError(GLFW_PLATFORM_ERROR, "Win32: Unknown standard cursor");
         return GLFW_FALSE;
+    }
 
     cursor->win32.handle = LoadImageW(NULL,
                                       MAKEINTRESOURCEW(id), IMAGE_CURSOR, 0, 0,

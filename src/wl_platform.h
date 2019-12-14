@@ -84,8 +84,8 @@ typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR
 #define _GLFW_PLATFORM_MONITOR_STATE        _GLFWmonitorWayland wl
 #define _GLFW_PLATFORM_CURSOR_STATE         _GLFWcursorWayland  wl
 
-#define _GLFW_PLATFORM_CONTEXT_STATE
-#define _GLFW_PLATFORM_LIBRARY_CONTEXT_STATE
+#define _GLFW_PLATFORM_CONTEXT_STATE         struct { int dummyContext; }
+#define _GLFW_PLATFORM_LIBRARY_CONTEXT_STATE struct { int dummyLibraryContext; }
 
 struct wl_cursor_image {
     uint32_t width;
@@ -256,6 +256,7 @@ typedef struct _GLFWlibraryWayland
     struct wl_cursor_theme*     cursorTheme;
     struct wl_cursor_theme*     cursorThemeHiDPI;
     struct wl_surface*          cursorSurface;
+    const char*                 cursorPreviousName;
     int                         cursorTimerfd;
     uint32_t                    serial;
 
